@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.littlemarket.User;
-import br.com.littlemarket.dao.UserDao;
+import br.com.littlemarket.dao.UserAdminDao;
 
 import java.io.IOException;
 
 
 @WebServlet("/create-user")
-public class CreateUserServlet extends HttpServlet{
+public class CreateUserAdminServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,11 +21,12 @@ public class CreateUserServlet extends HttpServlet{
         String username = request.getParameter("nome");
         String userPassword = request.getParameter("senha");
         String userEmail = request.getParameter("email");
+      
 
-        User user = new User(username, userEmail, userPassword);
-        new UserDao().createUser(user);
+        User user = new User(username, userEmail, userPassword,1);
+        new UserAdminDao().createUser(user);
 
-        request.getRequestDispatcher("cadastro.html").forward(request, response);
+        request.getRequestDispatcher("").forward(request, response);
 
     }
 }
