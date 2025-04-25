@@ -1,83 +1,93 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f2f2f2;
-  }
-  
-  header {
-    background-color: #007a33;
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  nav a {
-    color: white;
-    margin: 0 1rem;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .user-menu {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  main {
-    display: flex;
-    justify-content: center;
-    padding: 3rem 1rem;
-  }
-  
-  .form-container {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    border: 2px solid #007a33;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .form-container h2 {
-    color: #007a33;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-  
-  label {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  
-  button {
-    margin-top: 1.5rem;
-    background-color: #007a33;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  button:hover {
-    background-color: #005f26;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color: #007a33;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex; 
+  align-items: center; 
+}
+
+.logo-img {
+  height: 50px;
+  margin-right: 0.5rem;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+nav a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 2px solid #007a33;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-container h2 {
+  color: #007a33;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  margin-top: 1.5rem;
+  background-color: #007a33;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #005f26;
+}

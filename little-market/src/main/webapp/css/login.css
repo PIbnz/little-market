@@ -1,38 +1,44 @@
-body{
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f1f4f6;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f1f4f6;
 }
 
-.topo{
-    background-color: #0e773b;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 24px;
+.topo {
+  background-color: #0e773b;
+  color: white;
+  display: flex; /* Usar flexbox para alinhar itens lado a lado */
+  align-items: center; /* Alinhar verticalmente ao centro */
+  justify-content: center; /* Centralizar horizontalmente */
+  padding: 20px 0; /* Adicionando um pouco de padding */
+  font-size: 24px;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
+.topo .logo {
+  height: 60px; /* Ajuste a altura conforme necessário */
+  margin-right: 15px; /* Espaço entre a logo e o título */
 }
 
-.form-box{
-    background-color: white;
-    border: 2px solid #0e773b;
-    border-radius: 10px;
-    padding: 30px;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0, 1);
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
 }
 
-.form-box h2{
-    margin-bottom: 20px;
-    color: #0e773b;
+.form-box {
+  background-color: white;
+  border: 2px solid #0e773b;
+  border-radius: 10px;
+  padding: 30px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.form-box h2 {
+  margin-bottom: 20px;
+  color: #0e773b;
+}
 
 input[type="text"],
 input[type="email"],
@@ -71,6 +77,6 @@ button:hover {
   font-weight: bold;
 }
 
-h2{
-    text-align: center;
+h2 {
+  text-align: center;
 }
