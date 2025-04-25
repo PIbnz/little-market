@@ -36,7 +36,7 @@ Este projeto simula o funcionamento básico de um pequeno e-commerce, o **Little
 ---
 
 ## 🧩 Prototipagem
-(Feitas por Paulo e Breno)
+(Participação de todos)
 
 As imagens a seguir não seguem uma representação fiel do final do projeto, apenas uma base para se espelharmos. **Ocorrerá melhorias!** 
 
@@ -47,7 +47,12 @@ As imagens a seguir não seguem uma representação fiel do final do projeto, ap
 ![image](https://github.com/user-attachments/assets/053bbca8-677e-46da-9186-af9894c6e8eb)
 
 3 - Tela de Produtos
-![image](https://github.com/user-attachments/assets/ebe2fc7c-218c-4f67-84b3-b37ef82fb4e3)
+![image](https://github.com/user-attachments/assets/8f6a521b-56bd-4275-a48e-10b441e2d66b)
+
+4 - Prototipagem do Mer
+![Imagem do WhatsApp de 2025-04-25 à(s) 19 13 42_ecdb149e](https://github.com/user-attachments/assets/964c8cda-a178-44fa-b591-ece0d1725467)
+
+
 
 ---
 
