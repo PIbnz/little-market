@@ -1,0 +1,172 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007e3a;
+  color: white;
+  padding: 15px 30px;
+}
+
+.logo-area img {
+  height: 40px;
+}
+
+.menu-principal ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu-principal a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usuario img {
+  height: 24px;
+}
+
+
+.barra-pesquisa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.barra-pesquisa input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.logo-mini img {
+  height: 40px;
+}
+
+.icones-acesso {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icones-acesso img {
+  height: 24px;
+  cursor: pointer;
+}
+
+.contador {
+  font-weight: bold;
+}
+
+.aviso-frete {
+  text-align: center;
+  padding: 8px;
+  background-color: #f0f0f0;
+  font-size: 14px;
+}
+
+.destaque-bacalhau {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0e441f;
+  color: white;
+  padding: 30px;
+}
+
+.texto-esquerda h2 {
+  font-size: 30px;
+}
+
+.verde-neon {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.imagem-direita {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.imagem-direita img {
+  height: 150px;
+}
+
+.info-desconto {
+  background-color: #005b2d;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.info-desconto h3 {
+  font-size: 16px;
+}
+
+.info-desconto p {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.info-desconto strong {
+  font-size: 24px;
+  color: #00ff00;
+}
+
+
+.secao-ofertas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  background-color: #eef1f3;
+}
+
+.caixa-oferta {
+  background-color: white;
+  border: 2px solid #005b2d;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.caixa-oferta h4 {
+  color: #005b2d;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.caixa-oferta p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.caixa-oferta img {
+  height: 80px;
+}

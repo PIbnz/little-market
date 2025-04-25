@@ -1,0 +1,76 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f4f6;
+}
+
+.topo{
+    background-color: #0e773b;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 24px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.form-box{
+    background-color: white;
+    border: 2px solid #0e773b;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0, 1);
+}
+
+.form-box h2{
+    margin-bottom: 20px;
+    color: #0e773b;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0e773b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #0b5f2d;
+}
+
+.link {
+  margin-top: 15px;
+  text-align: center;
+  color: #333;
+}
+
+.link a {
+  color: #0e773b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h2{
+    text-align: center;
+}
