@@ -31,7 +31,7 @@ Este projeto simula o funcionamento básico de um pequeno e-commerce, o **Little
 
 - **Backend:** Java  
 - **Frontend:** HTML, CSS, JavaScript  
-- **Banco de Dados:** MySQL
+- **Banco de Dados:** H2
 
 ---
 
