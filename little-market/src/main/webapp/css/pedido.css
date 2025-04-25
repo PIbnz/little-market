@@ -28,12 +28,21 @@ header {
   font-size: 1.5rem;
 }
 
+nav {
+  display: flex;
+  gap: 30px;
+}
 
 nav a {
-  color: white;
-  margin: 0 1rem;
   text-decoration: none;
-  font-weight: bold;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #c8e6c9;
 }
 
 .user-menu {
