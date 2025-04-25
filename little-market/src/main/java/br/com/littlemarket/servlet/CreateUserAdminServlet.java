@@ -12,7 +12,7 @@ import br.com.littlemarket.dao.UserAdminDao;
 import java.io.IOException;
 
 
-@WebServlet("/create-user")
+@WebServlet("/create-user-admin")
 public class CreateUserAdminServlet extends HttpServlet{
 
     @Override

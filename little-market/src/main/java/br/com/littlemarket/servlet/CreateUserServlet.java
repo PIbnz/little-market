@@ -25,7 +25,7 @@ public class CreateUserServlet extends HttpServlet{
         User user = new User(username, userEmail, userPassword);
         new UserDao().createUser(user);
 
-        request.getRequestDispatcher("cadastro.html").forward(request, response);
+        request.getRequestDispatcher("/html/login.html").forward(request, response);
 
     }
 }
