@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto - Little Marke</title>
+    <link rel="stylesheet" href="adicionar.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/40x40?text=🛒" alt="Logo">
+        </div>
+        <nav>
+            <a href="#">Mercado</a>
+            <a href="#">Higiene</a>
+            <a href="#">Limpeza</a>
+        </nav>
+        <div class="user-menu">
+            <span>Admin</span>
+            <a href="#">Sair</a>
+    </header>
+
+    <main>
+        <h1>Adicionar Produto</h1>
+        <form class="formulario">
+            <input type="text" placeholder="Nome do Produto" required>
+            <input type="number" placeholder="Preço" step="0.01" required>
+           
+            <input type="file" accept="image/*">
+            <textarea placeholder="Descrição do Produto" rows="4"></textarea>
+            <button type="submit">Cadastrar Produto</button>
+        </form>
+    </main>
+
+</body>
+</html>
