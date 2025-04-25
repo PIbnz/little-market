@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 public class LoginDao {
 
     public User login(String email, String password) {
-        String sql = "SELECT * FROM tbusers WHERE LOWER(email) = LOWER(?) AND password = ?";
+        String sql = "SELECT * FROM tbuser WHERE LOWER(email) = LOWER(?) AND password = ?";
         try {
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
             PreparedStatement ps = connection.prepareStatement(sql);
