@@ -23,7 +23,7 @@ public class CreateUserAdminServlet extends HttpServlet{
         String userEmail = request.getParameter("email");
       
 
-        User user = new User(username, userEmail, userPassword,1);
+        User user = new User(username, userEmail, userPassword);
         new UserAdminDao().createUser(user);
 
         request.getRequestDispatcher("").forward(request, response);

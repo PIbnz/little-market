@@ -10,7 +10,7 @@ public class UserDao {
     
     public void createUser(User user) {
     
-        String sql = "INSERT INTO tbuser (username, email, password,user_type) VALUES (?, ?, ?,?)";
+        String sql = "INSERT INTO tbuser (username, email, password) VALUES (?, ?, ?)";
         try {
 
             Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa","sa");
@@ -22,7 +22,6 @@ public class UserDao {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, 0);
             preparedStatement.execute();
 
             System.out.println("success in creating user");

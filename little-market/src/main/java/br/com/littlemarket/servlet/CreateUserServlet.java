@@ -23,7 +23,9 @@ public class CreateUserServlet extends HttpServlet{
         String userEmail = request.getParameter("email");
 
         User user = new User(username, userEmail, userPassword);
-        new UserDao().createUser(user);
+        UserDao userDao = new UserDao();
+
+        userDao.createUser(user);
 
         request.getRequestDispatcher("/html/login.html").forward(request, response);
 
