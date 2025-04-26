@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto - Little Market</title>
+    <link rel="stylesheet" href="../css/adicionar.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../img/INDEX/logo-pequena.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="../html/produto.html">Alimentos</a>
+            <a href="../html/produto.html">Higiene</a>
+            <a href="../html/produto.html">Limpeza</a>
+        </nav>
+        <div class="user-menu">
+            <span>Admin</span>
+            <a href="../html/login.html">Sair</a>
+    </header>
+
+    <main>
+        <h1>Adicionar Produto</h1>
+        <form class="formulario" action="/createProduto" method="post">
+            <input type="text" placeholder="Nome do Produto" name="nome" id="nome" required>
+            <input type="number" placeholder="Preço" step="0.01" name="preco" id="preco" required>
+            <input type="number" placeholder="Estoque" step="0.01" name="estoque" id="estoque" required>
+            <input type="text" placeholder="Url da Imagem" name="imagem_url" id="imagem_url" required>
+            <textarea placeholder="Descrição do Produto" rows="4" id="descricao" name="descricao"></textarea>
+            <button type="submit">Cadastrar Produto</button>
+        </form>
+    </main>
+
+</body>
+</html>
