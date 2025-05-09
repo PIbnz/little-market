@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
+<%@ page import="br.com.littlemarket.model.Produto" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Meus Pedidos - Little Market</title>
-  <link rel="stylesheet" href="../css/verPedidos.css">
+    <title>Ver Produtos</title>
+    <link rel="stylesheet" href="../css/verProdutos.css">
 </head>
 <body>
-  <header>
+<header>
     <div class="logo-container">
       <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img">
       <div class="logo-text">Little Market</div>
@@ -18,29 +19,38 @@
     </nav>
   </header>
 
-  <main>
-    <h1>Produtos</h1>
-    <table>
-        <tr>
-            <th></th>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Descrição</th>
-            <th>Estoque</th>
-        </tr>
-        <c:forEach var="produto" items="${produtos}">
-            <tr>
-                <td></td>
-                <td>${produto.id}</td>
-                <td>${produto.name}</td>
-                <td>${produto.preco}</td>
-                <td>${produto.descricao}</td>
-                <td>${produto.estoque}</td>
-                <img src=${produto.imagem_url} alt="">
-            </tr>
-        </c:forEach>
-    </table>
-</main>
+<h2>Lista de Produtos</h2>
+
+<%
+    ProdutoDao produtoDao = new ProdutoDao();
+    List<Produto> produtos = produtoDao.getAllProdutos();
+%>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Imagem URL</th>
+        <th>Descrição</th>
+    </tr>
+    <%
+        for (Produto produto : produtos) { %>
+    <tr>
+        <td><%= produto.getId() %>
+        </td>
+        <td><%= produto.getNome() %>
+        </td>
+        <td><%= produto.getPreco() %>
+        </td>
+        <td><%= produto.getEstoque() %>
+        </td>
+        <td><img src="<%= produto.getImagemUrl() %>" alt="Imagem do Produto" width="100"></td>
+        <td><%= produto.getDescricao() %>
+        </td>
+    </tr>
+    <% } %>
+</table>
 </body>
 </html>
