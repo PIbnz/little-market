@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Meus Pedidos - Little Market</title>
-  <link rel="stylesheet" href="../css/verPedidos.css">
+<link rel="stylesheet" type="text/css" href="JSP.css">
 </head>
 <body>
   <header>
