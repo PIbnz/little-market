@@ -22,9 +22,9 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             // Redireciona conforme o tipo de usuário
             if (user.getPermissionLevel() == 1) {
-                response.sendRedirect("html/dono.html");
-            } else {
                 response.sendRedirect("html/usuario.html");
+            } else {
+                response.sendRedirect("html/dono.html");
             }
         } else {
             request.setAttribute("erro", "Login inválido");

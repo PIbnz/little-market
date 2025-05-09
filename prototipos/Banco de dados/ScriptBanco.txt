@@ -12,13 +12,10 @@ create table tbprodutos(
 ); 
 
 CREATE TABLE tbpedidos (
-    id INT PRIMARY KEY auto_increment,
-    produto_id INT NOT NULL,
-    user_id int not null,
-    quantidade INT NOT NULL,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pendente', 'processando', 'concluido', 'cancelado') DEFAULT 'pendente',
-    FOREIGN KEY (produto_id) REFERENCES tbprodutos(id),
     FOREIGN KEY (user_id) REFERENCES tbuser(id)
 );
 
@@ -31,52 +28,19 @@ create table tbuser(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Para pedidos criados atualizar o estoque
-DELIMITER //
+CREATE TABLE tbitens_pedido (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    pedido_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES tbpedidos(id),
+    FOREIGN KEY (produto_id) REFERENCES tbprodutos(id)
+);
 
-CREATE TRIGGER after_pedido_insert
-AFTER INSERT ON tbpedidos
-FOR EACH ROW
-BEGIN
-    -- Atualiza o estoque do produto
-    UPDATE produtos
-    SET estoque = estoque - NEW.quantidade
-    WHERE id = NEW.produto_id;
-    
-    -- Verifica se o estoque ficou negativo
-    IF (SELECT estoque FROM produtos WHERE id = NEW.produto_id) < 0 THEN
-        -- Reverte a operação
-        UPDATE tbprodutos
-        SET estoque = estoque + NEW.quantidade
-        WHERE id = NEW.produto_id;
-        
-        -- Cancela o pedido
-        UPDATE tbpedidos
-        SET status = 'cancelado'
-        WHERE id = NEW.id;
-        
-        -- Gera um erro
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Estoque insuficiente para o produto';
-    END IF;
-END//
-
-DELIMITER ;
-
--- Para cancelamento de pedidos
-DELIMITER //
-
-CREATE TRIGGER after_pedido_cancel
-AFTER UPDATE ON tbpedidos
-FOR EACH ROW
-BEGIN
-    -- Se o status mudou para cancelado, devolve o estoque
-    IF OLD.status != 'cancelado' AND NEW.status = 'cancelado' THEN
-        UPDATE tbprodutos
-        SET estoque = estoque + OLD.quantidade
-        WHERE id = OLD.produto_id;
-    END IF;
-END//
-
-DELIMITER ;
-
+Ver todos os itens de um pedido
+SELECT p.*, ip.quantidade, ip.preco_unitario
+FROM tbpedidos ped
+JOIN tbitens_pedido ip ON ped.id = ip.pedido_id
+JOIN tbprodutos p ON ip.produto_id = p.id
+WHERE ped.id = [ID_DO_PEDIDO];

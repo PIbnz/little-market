@@ -22,7 +22,7 @@ public class UserAdminDao {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getPermissionLevel());
+            preparedStatement.setInt(4, 2);
             preparedStatement.execute();
 
             System.out.println("success in creating user");
