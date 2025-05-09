@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Ver Produtos</title>
-    <link rel="stylesheet" href="../css/verProdutos.css">
+    <link rel="stylesheet" href="../css/JSP.css">
 </head>
 <body>
 <header>
