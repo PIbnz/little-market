@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Ver Produtos</title>
+<link rel="stylesheet" type="text/css" href="JSP.css">
 </head>
 <body>
 <h2>Lista de Produtos</h2>
