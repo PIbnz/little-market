@@ -1,6 +1,6 @@
 package br.com.littlemarket.dao;
 
-import br.com.littlemarket.User;
+import br.com.littlemarket.model.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

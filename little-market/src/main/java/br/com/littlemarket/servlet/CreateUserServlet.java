@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.littlemarket.User;
+import br.com.littlemarket.model.User;
 import br.com.littlemarket.dao.UserDao;
 
 import java.io.IOException;
@@ -27,7 +27,13 @@ public class CreateUserServlet extends HttpServlet{
 
         userDao.createUser(user);
 
-        request.getRequestDispatcher("/html/login.html").forward(request, response);
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().println("<script type='text/javascript'>");
+        response.getWriter().println("alert('Usuário cadastrado com sucesso! Siga para o login.');");
+        response.getWriter().println("window.location.href = '/html/login.html';");
+        response.getWriter().println("</script>");
 
     }
 }

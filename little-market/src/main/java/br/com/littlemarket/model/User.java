@@ -1,4 +1,4 @@
-package br.com.littlemarket;
+package br.com.littlemarket.model;
 
 public class User {
     

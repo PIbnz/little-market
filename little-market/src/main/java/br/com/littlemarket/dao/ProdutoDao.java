@@ -55,4 +55,18 @@ public class ProdutoDao {
         }
         return produtos;
     }
+    public boolean deleteProduto(int idProduto) {
+        String sql = "DELETE FROM tbprodutos WHERE id = ?";
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idProduto);
+            int rowsAffected = ps.executeUpdate();
+            connection.close();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println("Erro ao deletar produto: " + e.getMessage());
+            return false;
+        }
+    }
 }

@@ -17,7 +17,7 @@ public class Produto {
         this.imagemUrl = imagemUrl;
     }
 
-    public Produto(){
+    public Produto() {
 
     }
 

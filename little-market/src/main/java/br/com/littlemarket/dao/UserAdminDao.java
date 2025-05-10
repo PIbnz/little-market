@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import br.com.littlemarket.User;
+import br.com.littlemarket.model.User;
 
 public class UserAdminDao {
     

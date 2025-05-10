@@ -71,3 +71,13 @@ h2 {
 .card:hover {
   background-color: #e6f3ec;
 }
+button {
+  margin-top: 1.5rem;
+  background-color: #007a33;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}

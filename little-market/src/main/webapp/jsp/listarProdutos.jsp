@@ -42,7 +42,7 @@
         </td>
         <td><%= produto.getNome() %>
         </td>
-        <td><%= produto.getPreco() %>
+        <td>R$ <%= produto.getPreco() %>
         </td>
         <td><%= produto.getEstoque() %>
         </td>

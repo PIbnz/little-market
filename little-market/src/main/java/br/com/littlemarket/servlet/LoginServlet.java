@@ -1,6 +1,6 @@
 package br.com.littlemarket.servlet;
 
-import br.com.littlemarket.User;
+import br.com.littlemarket.model.User;
 import br.com.littlemarket.dao.LoginDao;
 
 import javax.servlet.ServletException;

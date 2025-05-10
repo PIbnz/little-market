@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.littlemarket.User;
+import br.com.littlemarket.model.User;
 import br.com.littlemarket.dao.UserAdminDao;
 
 import java.io.IOException;

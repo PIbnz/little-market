@@ -1,53 +1,72 @@
+<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
+<%@ page import="br.com.littlemarket.model.Produto" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
-<html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html lang="pt-BR">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-  <meta charset="UTF-8">
-  <title>Meus Pedidos - Little Market</title>
-  <link rel="stylesheet" type="text/css" href="../css/JSP.css">
+    <meta charset="UTF-8">
+    <title>Administrar Produtos - Little Market</title>
+    <link rel="stylesheet" type="text/css" href="../css/JSP.css">
 </head>
 <body>
-  <header>
+<header>
     <div class="logo-container">
-      <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img">
-      <div class="logo-text">Little Market</div>
+        <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img">
+        <div class="logo-text">Little Market</div>
     </div>
     <nav>
-      <a href="usuario.html">Home</a>
-      <a href="produtos.html">Produtos</a>
+        <a href="usuario.html">Home</a>
+        <a href="produtos.html">Produtos</a>
     </nav>
-  </header>
+</header>
 <div>
     <h1>Produtos</h1>
     <table>
         <tr>
-            <th></th>
             <th>Id</th>
+            <th>Imagem</th>
             <th>Nome</th>
             <th>Preço</th>
             <th>Descrição</th>
             <th>Estoque</th>
+            <th>Ações</th>
         </tr>
-        <c:forEach var="produto" items="${produtos}">
-            <tr>
-                <td></td>
-                <td>${produto.id}</td>
-                <td>${produto.name}</td>
-                <td>${produto.preco}</td>
-                <td>${produto.descricao}</td>
-                <td>${produto.estoque}</td>
-                <img src=${produto.imagem_url} alt="">
-                <form action="/delete-produto" method="post">
-                    <input type="hidden" id="id" name="id" value="${produto.id}">
-                    <button type="submit">Deletar</button>
+        <%
+            ProdutoDao produtoDao = new ProdutoDao();
+            List<Produto> produtos = produtoDao.getAllProdutos();
+            for (Produto produto : produtos) { %>
+        <script>
+            function exclusao() {
+                alert("Produto excluído com sucesso!");
+            }
+        </script>
+        <tr>
+            <td><%= produto.getId() %>
+            </td>
+            <td><img src=<%= produto.getImagemUrl()%> alt=""></td>
+            <td><%= produto.getNome() %>
+            </td>
+            <td>R$ <%= produto.getPreco() %>
+            </td>
+            <td><%= produto.getDescricao() %>
+            </td>
+            <td><%= produto.getEstoque() %>
+            </td>
+            <td>
+                <form action="/alterar-produto" method="post" style="display: inline;">
+                    <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
+                    <button class="alterar" type="submit">Alterar</button>
                 </form>
-                <form action="/alterar-produto" method="post">
-                    <input type="hidden" id="id" name="id" value="${produto.id}">
-                    <button type="submit">Alterar</button>
+                <form action="/delete-produto" method="post" style="display: inline;" onsubmit="exclusao();">
+                    <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
+                    <button class="excluir" type="submit">Deletar</button>
                 </form>
-            </tr>
-        </c:forEach>
+            </td>
+        </tr>
+        <% } %>
     </table>
-  </div>
+</div>
+
 </body>
 </html>

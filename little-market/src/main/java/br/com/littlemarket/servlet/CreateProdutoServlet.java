@@ -24,7 +24,7 @@ public class CreateProdutoServlet extends HttpServlet {
             preco = Double.parseDouble(request.getParameter("preco"));
             estoque = Integer.parseInt(request.getParameter("estoque"));
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid price format");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de preço ou estoque inválido.");
             return;
         }
 
@@ -37,7 +37,9 @@ public class CreateProdutoServlet extends HttpServlet {
 
         ProdutoDao produtoDao = new ProdutoDao();
         produtoDao.createProduto(produto);
-        response.getWriter().println("Product created successfully!");
+
+        response.sendRedirect("html/gerenciar.jsp");
+
 
     }
 }

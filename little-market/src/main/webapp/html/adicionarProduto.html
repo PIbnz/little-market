@@ -21,10 +21,14 @@
             <span>Admin</span>
             <a href="../html/login.html">Sair</a>
     </header>
-
+    <script>
+        function mostrarPopup() {
+            alert("Produto adicionado com sucesso!");
+        }
+    </script>
     <main>
         <h1>Adicionar Produto</h1>
-        <form class="formulario" action="/createProduto" method="post">
+        <form class="formulario" action="/createProduto" method="post" onsubmit="mostrarPopup()">
             <input type="text" placeholder="Nome do Produto" name="nome" id="nome" required>
             <input type="number" placeholder="Preço" step="0.01" name="preco" id="preco" required>
             <input type="number" placeholder="Estoque" step="0.01" name="estoque" id="estoque" required>
