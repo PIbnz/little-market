@@ -1,7 +1,9 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
 }
 
 header {
@@ -11,11 +13,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo-container {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
@@ -25,7 +28,8 @@ header {
 
 .logo-text {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
 }
 
 nav a {
@@ -33,27 +37,30 @@ nav a {
   margin: 0 1rem;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+nav a:hover {
+  color: #cfeadf;
 }
 
 main {
   padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 h2 {
   color: #007a33;
   margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
 .painel {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
@@ -64,20 +71,14 @@ h2 {
   text-decoration: none;
   color: #007a33;
   font-weight: bold;
-  flex: 1 1 200px;
-  transition: 0.3s;
+  flex: 1 1 250px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
 }
 
 .card:hover {
   background-color: #e6f3ec;
-}
-button {
-  margin-top: 1.5rem;
-  background-color: #007a33;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
 }

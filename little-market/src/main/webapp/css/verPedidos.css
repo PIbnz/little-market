@@ -1,7 +1,9 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
 }
 
 header {
@@ -11,11 +13,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo-container {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
@@ -25,30 +28,36 @@ header {
 
 .logo-text {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
 }
-
 
 nav a {
   color: white;
   margin: 0 1rem;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+nav a:hover {
+  color: #cfeadf;
 }
 
 main {
   padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-h2 {
+h1 {
   color: #007a33;
   margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.table-container {
+  overflow-x: auto;
 }
 
 .tabela {
@@ -56,6 +65,7 @@ h2 {
   border-collapse: collapse;
   background-color: white;
   border: 2px solid #007a33;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .tabela th,
@@ -67,4 +77,17 @@ h2 {
 
 .tabela th {
   background-color: #e6f3ec;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .tabela th,
+  .tabela td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
 }

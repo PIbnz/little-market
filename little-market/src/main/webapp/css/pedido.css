@@ -1,7 +1,8 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
 header {
@@ -9,13 +10,15 @@ header {
   color: white;
   padding: 1rem 2rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo-container {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
@@ -25,78 +28,119 @@ header {
 
 .logo-text {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
 }
 
 nav {
   display: flex;
-  gap: 30px;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 nav a {
-  text-decoration: none;
   color: white;
-  font-size: 18px;
+  text-decoration: none;
+  font-size: 1rem;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #c8e6c9;
+  color: #b2dfdb;
 }
 
 .user-menu {
   display: flex;
-  align-items: center;
   gap: 1rem;
+  align-items: center;
+  margin-top: 0.5rem;
 }
 
 main {
-  display: flex;
-  justify-content: center;
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.form-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  border: 2px solid #007a33;
-  width: 100%;
-  max-width: 400px;
-}
-
-.form-container h2 {
+h1 {
   color: #007a33;
-  margin-bottom: 1.5rem;
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
-label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+.produtos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
-input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.produto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
 }
 
-button {
-  margin-top: 1.5rem;
+.produto:hover {
+  transform: translateY(-2px);
+}
+
+.nome {
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex: 1;
+}
+
+.controle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.controle button {
   background-color: #007a33;
   color: white;
   border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  width: 100%;
+  transition: background 0.2s ease;
 }
 
-button:hover {
+.controle button:hover {
+  background-color: #005f26;
+}
+
+.quantidade {
+  min-width: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.finalizar {
+  margin-top: 2.5rem;
+  background-color: #007a33;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.finalizar:hover {
   background-color: #005f26;
 }

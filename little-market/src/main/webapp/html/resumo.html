@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumo do Pedido - Little Market</title>
+  <link rel="stylesheet" href="../css/resumo.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../img/INDEX/logo-pequena.png" alt="Logo da empresa Little Market" class="logo-img">
+      <div class="logo-text">Little Market</div>
+    </div>
+    <nav>
+      <a href="../html/usuario.html">Home</a>
+      <a href="../html/pedido.html">Novo Pedido</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Resumo do Pedido</h1>
+    <div id="resumo-container" class="resumo-container">
+      <!-- Os itens serão inseridos via JS -->
+    </div>
+
+    <div class="acoes">
+      <button onclick="limparPedido()">🧹 Limpar Pedido</button>
+      <button onclick="confirmarPedido()">✅ Confirmar Pedido</button>
+    </div>
+  </main>
+
+  <script src="../js/resumo.js"></script>
+</body>
+</html>
