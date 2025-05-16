@@ -44,3 +44,21 @@ FROM tbpedidos ped
 JOIN tbitens_pedido ip ON ped.id = ip.pedido_id
 JOIN tbprodutos p ON ip.produto_id = p.id
 WHERE ped.id = [ID_DO_PEDIDO];
+
+Inserts de produtos
+INSERT INTO tbprodutos (nome, descricao, preco, estoque, imagem_url) VALUES
+('Arroz Tipo 1 5kg', 'Arroz branco tipo 1, embalagem de 5kg.', 22.90, 120, 'https://www.varanda.com.br/media/catalog/product/cache/1/image/1200x/9df78eab33525d08d6e5fb8d27136e95/a/r/arroz-camil-tp1-5kg-7896006711155.jpg'),
+('Feijão Carioca 1kg', 'Feijão carioca selecionado, pacote de 1kg.', 8.99, 85, 'https://mambodelivery.vtexassets.com/arquivos/ids/167357/feijao-carioca-tipo-1-kicaldo-1kg.jpg?v=637883236210600000'),
+('Óleo de Soja 900ml', 'Óleo de soja refinado, 900ml.', 6.49, 150, 'https://www.dellys.com.br/ccstore/v1/images/?source=/file/v1395441142427522844/products/102899.imagem1.jpg&height=940&width=940'),
+('Açúcar Cristal 1kg', 'Açúcar cristal branco, pacote de 1kg.', 4.25, 200, 'https://th.bing.com/th/id/OIP.uSdJcCB7q6ISwD02hZvhCQHaHa?rs=1&pid=ImgDetMain'),
+('Café Torrado e Moído 500g', 'Café tradicional torrado e moído.', 12.50, 90, 'https://th.bing.com/th/id/OIP.CZKeT1wq1oBYs2QOuemDRwHaHa?rs=1&pid=ImgDetMain'),
+('Leite Integral 1L', 'Leite UHT integral, caixinha de 1L.', 4.99, 180, 'https://th.bing.com/th/id/OIP.wgN7NHwn32_y6YnfPZ-yRwHaHa?rs=1&pid=ImgDetMain'),
+('Sabonete Neutro 90g', 'Sabonete hidratante com glicerina.', 2.30, 300, 'https://mambodelivery.vtexassets.com/arquivos/ids/179589/sabonete-neutro-glicerina-granado-90g_1.jpg?v=637883927829000000'),
+('Shampoo 350ml', 'Shampoo para cabelos normais, sem sal.', 9.90, 75, 'https://th.bing.com/th/id/OIP.BIi3GwAN9Fs6DjRGljmZWwHaHa?rs=1&pid=ImgDetMain'),
+('Detergente Líquido 500ml', 'Detergente neutro para louças.', 2.10, 200, 'https://th.bing.com/th/id/R.2989a67b5b86950a7d09372ef1653fd1?rik=eaBoj6SlFDqEWw&pid=ImgRaw&r=0'),
+('Papel Higiênico 12 rolos', 'Papel higiênico folha dupla.', 18.90, 60, 'https://th.bing.com/th/id/OIP.D9_bgwzlTm1Fl8UHLehglwHaHa?rs=1&pid=ImgDetMain'),
+('Macarrão Espaguete 500g', 'Macarrão tipo espaguete tradicional.', 3.20, 100, 'https://th.bing.com/th/id/OIP.yROirMJ-WVGdtxWCcYJo1gHaHa?rs=1&pid=ImgDetMain'),
+('Molho de Tomate 340g', 'Molho de tomate tradicional, sachê de 340g.', 2.99, 130, 'https://th.bing.com/th/id/OIP.TyjtKlUvojQlEP7qkxTNnAHaHa?rs=1&pid=ImgDetMain'),
+('Biscoito Recheado Chocolate 140g', 'Biscoito recheado sabor chocolate.', 2.50, 90, 'https://obahortifruti.vtexassets.com/arquivos/ids/4689655/Biscoito-Recheado-Duplo-Chocolate-Bauducco-140-G.jpg?v=638232266995730000'),
+('Refrigerante Cola 2L', 'Refrigerante sabor cola, garrafa de 2 litros.', 7.49, 70, 'https://th.bing.com/th/id/OIP.IUs8ngbwj29Ng9Nj0vZv8QAAAA?rs=1&pid=ImgDetMain'),
+('Água Mineral Sem Gás 1,5L', 'Água mineral natural sem gás.', 2.10, 100, 'https://th.bing.com/th/id/OIP.lPE3DORBLAYX5WuHuKMMpgHaHa?rs=1&pid=ImgDetMain');
