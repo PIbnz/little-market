@@ -1,0 +1,148 @@
+:root {
+    --primary-color: #007e3a;
+    --secondary-color: #005b2d;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --button-text: #ffffff;
+    --highlight-color: #00ff00;
+    --soft-background: #eef1f3;
+    --danger-color: #f44336;
+    --danger-hover: #c62828;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary-color);
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.conta a {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid var(--secondary-color);
+}
+
+.conta a:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+    color: var(--button-text);
+}
+
+.hero {
+    background-color: var(--soft-background);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.button {
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    background-color: var(--soft-background);
+}
+
+.product-card {
+    background-color: var(--background-color);
+    border: 2px solid var(--secondary-color);
+    padding: 16px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.button.danger {
+    background-color: var(--danger-color);
+}
+
+.button.danger:hover {
+    background-color: var(--danger-hover);
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
