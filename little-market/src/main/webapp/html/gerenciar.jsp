@@ -58,5 +58,9 @@
         <a href="adicionarProduto.html" class="botao-adicionar">Adicionar Novo Produto</a>
     </main>
 
+    <footer>
+        &copy; 2024 Little Market - Todos os direitos reservados.
+    </footer>
+
 </body>
 </html>

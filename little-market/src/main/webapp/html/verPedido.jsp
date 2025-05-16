@@ -48,5 +48,10 @@
       </tbody>
     </table>
   </main>
+
+  <footer>
+    &copy; 2024 Little Market - Todos os direitos reservados.
+</footer>
+
 </body>
 </html>
