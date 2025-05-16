@@ -1,94 +1,138 @@
-body {
+:root {
+    --primary-color: #007e3a;
+    --secondary-color: #005b2d;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --button-text: #ffffff;
+    --highlight-color: #00ff00;
+    --soft-background: #eef1f3;
+  }
+  
+  
+  * {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
-}
-
-header {
-    background-color: #007a33;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 40px;
-}
-
-.logo img {
-    height: 40px;
-}
-
-nav {
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: var(--primary-color);
+    padding: 10px;
     color: white;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: #c8e6c9;
-}
-
-.conta a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-main {
-    padding: 40px 20px;
     text-align: center;
-}
-
-main h1 {
-    margin-bottom: 30px;
-    font-size: 32px;
-    color: #333;
-}
-
-.grade-produtos {
+  }
+  
+  nav {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
-}
-
-.produto {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    width: 240px;
-    padding: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.produto img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.produto h2 {
-    font-size: 20px;
-    margin: 15px 0 10px;
-    color: #333;
-}
-
-.produto .preco {
-    font-size: 18px;
+    background-color: var(--secondary-color);
+    padding: 10px 0;
+  }
+  
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
     font-weight: bold;
-    color: #007a33;
-}
-
-.produto:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+  }
+  .conta a {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid var(--secondary-color);
+  }
+  
+  .conta a:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+    color: var(--button-text);
+  }
+  
+  .hero {
+    background-color: var(--soft-background);
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .button {
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    background-color: var(--soft-background);
+  }
+  
+  .product-card {
+    background-color: var(--background-color);
+    border: 2px solid var(--secondary-color);
+    padding: 16px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  
+  .product-card img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  
+  .product-card h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+  }
+  
+  footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .aviso {
+    background-color: var(--soft-background);
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .aviso strong {
+    color: var(--highlight-color);
+  }

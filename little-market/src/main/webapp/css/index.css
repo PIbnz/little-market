@@ -1,172 +1,122 @@
 
+:root {
+  --primary-color: #007e3a;
+  --secondary-color: #005b2d;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --button-text: #ffffff;
+  --highlight-color: #00ff00;
+  --soft-background: #eef1f3;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
-
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-
-.topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #007e3a;
+header {
+  background-color: var(--primary-color);
+  padding: 15px;
   color: white;
-  padding: 15px 30px;
+  text-align: center;
 }
 
-.logo-area img {
-  height: 40px;
-}
-
-.menu-principal ul {
-  list-style: none;
+nav {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  padding: 10px 0;
 }
 
-.menu-principal a {
+nav a {
   color: white;
+  margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
 }
 
-.usuario {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.usuario img {
-  height: 24px;
-}
-
-
-.barra-pesquisa {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 30px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.barra-pesquisa input {
-  width: 50%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.logo-mini img {
-  height: 50px;
-}
-
-.icones-acesso {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.icones-acesso img {
-  height: 24px;
-  cursor: pointer;
-}
-
-.contador {
-  font-weight: bold;
-}
-
-.aviso-frete {
+.hero {
+  background-color: var(--soft-background);
+  padding: 60px 20px;
   text-align: center;
-  padding: 8px;
-  background-color: #f0f0f0;
-  font-size: 14px;
 }
 
-.destaque-bacalhau {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #0e441f;
-  color: white;
-  padding: 30px;
+.hero h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
 }
 
-.texto-esquerda h2 {
-  font-size: 30px;
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 10px;
 }
 
-.verde-neon {
-  color: #00ff00;
+.button {
+  background-color: var(--primary-color);
+  color: var(--button-text);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-.imagem-direita {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.button:hover {
+  background-color: var(--secondary-color);
 }
 
-.imagem-direita img {
-  height: 150px;
-}
-
-.info-desconto {
-  background-color: #005b2d;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.info-desconto h3 {
-  font-size: 16px;
-}
-
-.info-desconto p {
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.info-desconto strong {
-  font-size: 24px;
-  color: #00ff00;
-}
-
-
-.secao-ofertas {
+.products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  padding: 30px;
-  background-color: #eef1f3;
+  padding: 40px;
+  background-color: var(--soft-background);
 }
 
-.caixa-oferta {
-  background-color: white;
-  border: 2px solid #005b2d;
+.product-card {
+  background-color: var(--background-color);
+  border: 2px solid var(--secondary-color);
+  padding: 16px;
+  border-radius: 6px;
   text-align: center;
-  padding: 20px;
-  border-radius: 10px;
 }
 
-.caixa-oferta h4 {
-  color: #005b2d;
-  font-size: 18px;
+.product-card img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
   margin-bottom: 10px;
 }
 
-.caixa-oferta p {
-  font-size: 14px;
-  margin-bottom: 15px;
+.product-card h3 {
+  color: var(--primary-color);
+  font-size: 1.1rem;
 }
 
-.caixa-oferta img {
-  height: 80px;
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+}
+
+.aviso {
+  background-color: var(--soft-background);
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.aviso strong {
+  color: var(--highlight-color);
 }
