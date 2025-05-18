@@ -91,3 +91,14 @@ h1 {
     font-size: 1.5rem;
   }
 }
+button
+{
+  background-color: #007a33;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px 0;
+}

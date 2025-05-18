@@ -16,7 +16,7 @@
             <div class="logo-text">Little Market</div>
           </div>
         <nav>
-            <a href="../html/produto.html">Produtos</a>
+            <a href="produto.jsp">Produtos</a>
             <a href="adicionarProduto.html">Adicionar Produto</a>
             <a href="../html/gerenciar.html">Gerenciar Estoque</a>
         </nav>

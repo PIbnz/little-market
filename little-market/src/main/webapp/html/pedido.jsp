@@ -17,9 +17,9 @@
       <div class="logo-text">Little Market</div>
     </div>
     <nav>
-      <a href="../html/produto.html">Alimentos</a>
-      <a href="../html/produto.html">Higiene</a>
-      <a href="../html/produto.html">Limpeza</a>
+      <a href="produto.jsp">Alimentos</a>
+      <a href="produto.jsp">Higiene</a>
+      <a href="produto.jsp">Limpeza</a>
     </nav>
     <div class="user-menu">
       <%

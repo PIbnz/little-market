@@ -15,7 +15,7 @@
     </div>
     <nav>
       <a href="../html/usuario.html">Home</a>
-      <a href="../html/produto.html">Produtos</a>
+      <a href="produto.jsp">Produtos</a>
     </nav>
   </header>
 
@@ -47,6 +47,9 @@
         %>
       </tbody>
     </table>
+    <form action="../createPedido" method="post">
+      <button type="submit">Novo Pedido</button>
+    </form>
   </main>
 
   <footer>
