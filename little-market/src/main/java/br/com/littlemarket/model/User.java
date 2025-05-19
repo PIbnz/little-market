@@ -2,30 +2,20 @@ package br.com.littlemarket.model;
 
 public class User {
 
-    private int id;
-    private String name; 
+    private String name;
     private String email;
     private String password; 
     private int permissionLevel; // 0 = user, 1 = admin
 
-    public User(int id, String name, String email, String password) {
-        this(id, name, email, password, 0);
+    public User(String name, String email, String password) {
+        this(name, email, password, 0);
     }
 
-    public User(int id, String name, String email, String password, int permissionLevel) {
-        this.id = id;
+    public User(String name, String email, String password, int permissionLevel) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.permissionLevel = permissionLevel;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     // Getters

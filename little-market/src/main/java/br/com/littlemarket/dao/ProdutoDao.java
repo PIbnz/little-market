@@ -23,11 +23,10 @@ public class ProdutoDao {
             ps.setString(5, produto.getImagemUrl())
             ;
             ps.executeUpdate();
-            System.out.println("Product created successfully!");
 
             connection.close();
         } catch (Exception e) {
-            System.out.println("Error creating product: " + e.getMessage());
+            System.out.println("Erro ao criar produto: " + e.getMessage());
         }
     }
     public List<Produto> getAllProdutos() {
@@ -51,7 +50,7 @@ public class ProdutoDao {
             }
             connection.close();
         } catch (Exception e) {
-            System.out.println("Error fetching products: " + e.getMessage());
+            System.out.println("Erro ao listar produtos: " + e.getMessage());
         }
         return produtos;
     }
@@ -66,6 +65,25 @@ public class ProdutoDao {
             return rowsAffected > 0;
         } catch (Exception e) {
             System.out.println("Erro ao deletar produto: " + e.getMessage());
+            return false;
+        }
+    }
+    public boolean alterProduto (Produto produto) {
+        String sql = "UPDATE tbprodutos SET nome = ?, descricao = ?, preco = ?, estoque = ?, imagem_url = ? WHERE id = ?";
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, produto.getNome());
+            ps.setString(2, produto.getDescricao());
+            ps.setDouble(3, produto.getPreco());
+            ps.setInt(4, produto.getEstoque());
+            ps.setString(5, produto.getImagemUrl());
+            ps.setInt(6, produto.getId());
+            int rowsAffected = ps.executeUpdate();
+            connection.close();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar produto: " + e.getMessage());
             return false;
         }
     }

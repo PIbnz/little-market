@@ -18,42 +18,47 @@
         <nav>
             <a href="produto.jsp">Produtos</a>
             <a href="adicionarProduto.html">Adicionar Produto</a>
-            <a href="../html/gerenciar.html">Gerenciar Estoque</a>
+            <a href="../html/gerenciar.jsp">Gerenciar Estoque</a>
         </nav>
     </header>
     <main>
         <h1>Gerenciar Estoque</h1>
         <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Produto</th>
-                    <th>Preço</th>
-                    <th>Quantidade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Estoque</th>
+                <th>Ações</th>
+            </tr>
             <%
                 ProdutoDao produtoDao = new ProdutoDao();
                 List<Produto> produtos = produtoDao.getAllProdutos();
                 for (Produto produto : produtos) { %>
-                <tr>
-                    <td><%= produto.getId() %>
-                    </td>
-                    <td><%= produto.getNome() %>
-                    </td>
-                    <td>R$ <%= produto.getPreco() %>
-                    </td>
-                    <td><%= produto.getEstoque() %>
-                    </td>
-                    <td>
-                        <button class="editar">Editar</button>
-                        <button class="excluir">Excluir</button>
-                    </td>
-                </tr>
+
+            <tr>
+                <td><%= produto.getId() %>
+                </td>
+                <td><%= produto.getNome() %>
+                </td>
+                <td>R$ <%= produto.getPreco() %>
+                </td>
+                <td><%= produto.getDescricao() %>
+                </td>
+                <td><%= produto.getEstoque() %>
+                </td>
+                <td>
+                    <form action="/alterar-produto" method="post" style="display: inline;">
+                        <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
+                        <button class="alterar" type="submit">Alterar</button>
+                    </form>
+                    <form action="/delete-produto" method="post" style="display: inline;" onsubmit="exclusao();">
+                        <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
+                        <button class="excluir" type="submit">Deletar</button>
+                    </form>
+                </td>
+            </tr>
             <% } %>
-            </tbody>
         </table>
         <a href="adicionarProduto.html" class="botao-adicionar">Adicionar Novo Produto</a>
     </main>

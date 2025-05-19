@@ -36,11 +36,7 @@
             ProdutoDao produtoDao = new ProdutoDao();
             List<Produto> produtos = produtoDao.getAllProdutos();
             for (Produto produto : produtos) { %>
-        <script>
-            function exclusao() {
-                alert("Produto excluído com sucesso!");
-            }
-        </script>
+
         <tr>
             <td><%= produto.getId() %>
             </td>
@@ -67,8 +63,11 @@
         <% } %>
     </table>
 </div>
-
-
+<script>
+    function exclusao() {
+        alert("Produto excluído com sucesso!");
+    }
+</script>
 <footer>
     &copy; 2024 Little Market - Todos os direitos reservados.
 </footer>

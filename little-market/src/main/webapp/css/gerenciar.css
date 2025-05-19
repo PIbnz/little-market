@@ -61,15 +61,13 @@ th, td {
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
-
-button.editar {
+button.alterar {
     background-color: #1976d2;
     color: white;
     border: none;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px;
 }
 
 button.excluir {
@@ -81,12 +79,3 @@ button.excluir {
     cursor: pointer;
 }
 
-.botao-adicionar {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #2e7d32;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
