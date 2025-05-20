@@ -20,7 +20,7 @@
     <%
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            response.sendRedirect("../html/login.html");
+            response.sendRedirect("../html/login.jsp");
             return;
         }
 

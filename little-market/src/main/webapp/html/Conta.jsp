@@ -36,7 +36,7 @@
             <% if (user == null) { %>
                 <div class="alert alert-warning">
                     Você precisa estar logado para ver sua conta.
-                    <a href="../html/login.html">Fazer login</a>
+                    <a href="../html/login.jsp">Fazer login</a>
                 </div>
             <% } else { %>
                 <div class="conta-container">

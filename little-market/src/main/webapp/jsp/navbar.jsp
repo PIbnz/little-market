@@ -17,9 +17,9 @@
     <div class="user-menu">
         <% if (user != null) { %>
             <span>Olá, <%= user.getName() %></span>
-            <a href="../html/login.html">Sair</a>
+            <a href="../html/login.jsp?logout=true">Sair</a>
         <% } else { %>
-            <a href="../html/login.html">Login</a>
+            <a href="../html/login.jsp">Login</a>
         <% } %>
     </div>
 </header> 
