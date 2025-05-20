@@ -23,7 +23,7 @@
             <%
                 User user = (User) session.getAttribute("user");
                 PedidoDao pedidoDao = new PedidoDao();
-                List<Pedido> pedidos = new ArrayList<>();
+                List<Pedido> pedidos = new ArrayList<Pedido>();
                 
                 if (user != null) {
                     try {
@@ -37,7 +37,7 @@
             <% if (user == null) { %>
                 <div class="alert alert-warning">
                     Você precisa estar logado para ver seus pedidos.
-                    <a href="../html/login.html">Fazer login</a>
+                    <a href="../html/login.jsp">Fazer login</a>
                 </div>
             <% } else if (pedidos.isEmpty()) { %>
                 <div class="alert alert-info">

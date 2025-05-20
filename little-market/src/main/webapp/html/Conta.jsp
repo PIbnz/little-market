@@ -18,7 +18,7 @@
     <%
         User user = (User) session.getAttribute("user");
         PedidoDao pedidoDao = new PedidoDao();
-        List<Pedido> pedidos = new ArrayList<>();
+        List<Pedido> pedidos = new ArrayList<Pedido>();
         
         if (user != null) {
             try {
@@ -45,9 +45,6 @@
                         <div class="info-card">
                             <p><strong>Nome:</strong> <%= user.getName() %></p>
                             <p><strong>Email:</strong> <%= user.getEmail() %></p>
-                            <p><strong>CPF:</strong> <%= user.getCpf() %></p>
-                            <p><strong>Telefone:</strong> <%= user.getTelefone() %></p>
-                            <p><strong>Endereço:</strong> <%= user.getEndereco() %></p>
                         </div>
                     </div>
 

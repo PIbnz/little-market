@@ -28,7 +28,7 @@
         PedidoDao pedidoDao = new PedidoDao();
         List<ItemCarrinho> carrinho = (List<ItemCarrinho>) session.getAttribute("carrinho");
         if (carrinho == null) {
-            carrinho = new ArrayList<>();
+            carrinho = new ArrayList<ItemCarrinho>();
             session.setAttribute("carrinho", carrinho);
         }
 
@@ -70,7 +70,13 @@
         if (removeItem != null) {
             try {
                 int produtoId = Integer.parseInt(removeItem);
-                carrinho.removeIf(item -> item.getProdutoId() == produtoId);
+                for (Iterator<ItemCarrinho> iterator = carrinho.iterator(); iterator.hasNext();) {
+                    ItemCarrinho item = iterator.next();
+                    if (item.getProdutoId() == produtoId) {
+                        iterator.remove();
+                        break;
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -148,9 +154,7 @@
                             <div class="carrinho-total">
                                 <h4>Total do Pedido:</h4>
                                 <p class="total-value">
-                                    R$ <%= String.format("%.2f", carrinho.stream()
-                                        .mapToDouble(item -> item.getQuantidade() * item.getPrecoUnitario())
-                                        .sum()) %>
+                                    R$ <%= String.format("%.2f", calcularTotal(carrinho)) %>
                                 </p>
                             </div>
                             
@@ -169,3 +173,13 @@
     </footer>
 </body>
 </html>
+
+<%!
+    private double calcularTotal(List<ItemCarrinho> carrinho) {
+        double total = 0.0;
+        for (ItemCarrinho item : carrinho) {
+            total += item.getQuantidade() * item.getPrecoUnitario();
+        }
+        return total;
+    }
+%>
