@@ -41,8 +41,12 @@
                 if (loggedUser != null) {
                     // Salva o usuário na sessão
                     session.setAttribute("user", loggedUser);
+                    if(loggedUser.getPermissionLevel() == 1){
                     response.sendRedirect("usuario.html");
                     return;
+                    }else{
+                    response.sendRedirect("dono.html");
+                    }
                 } else {
                     error = "Email ou senha inválidos";
                 }
