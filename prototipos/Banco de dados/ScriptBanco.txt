@@ -8,7 +8,7 @@ create table tbprodutos(
     descricao TEXT,
     preco DECIMAL(10,2) NOT NULL,
     estoque INT,
-    imagem_url VARCHAR(255)
+    imagem_url VARCHAR(5000)
 ); 
 
 CREATE TABLE tbpedidos (

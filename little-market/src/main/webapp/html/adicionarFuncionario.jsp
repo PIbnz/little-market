@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/usuario.css">
 </head>
 <body>
-    <jsp:include page="../jsp/navbar.jsp" />
+    <jsp:include page="../jsp/navbar_dono.jsp" />
     <main>
         <div class="container">
             <h2>Novo Funcionário</h2>

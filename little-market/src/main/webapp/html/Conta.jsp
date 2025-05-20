@@ -11,6 +11,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta - Little Market</title>
     <link rel="stylesheet" href="../css/usuario.css">
+    <style>
+        .conta-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        .info-card, .pedidos-section {
+            background:#fff;
+            padding:1.5rem;
+            border-radius:8px;
+            box-shadow:0 2px 4px rgba(0,0,0,0.1);
+        }
+        .pedidos-lista {
+            display:grid;
+            gap:1rem;
+            max-height:400px;
+            overflow:auto;
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="../jsp/navbar.jsp" />

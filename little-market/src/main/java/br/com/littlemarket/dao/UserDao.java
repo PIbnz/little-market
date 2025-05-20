@@ -37,5 +37,23 @@ public class UserDao {
 
      }
 
+    public User getUserById(int id) {
+        String sql = "SELECT * FROM tbuser WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa","sa");
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (java.sql.ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User(rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getInt("user_type"));
+                    user.setId(rs.getInt("id"));
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar usuário: " + e.getMessage());
+        }
+        return null;
     }
+
+}
 

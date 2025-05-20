@@ -10,17 +10,7 @@
     <link rel="stylesheet" href="../css/gerenciar.css">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img">
-            <div class="logo-text">Little Market</div>
-          </div>
-        <nav>
-            <a href="produto.jsp">Produtos</a>
-            <a href="adicionarProduto.html">Adicionar Produto</a>
-            <a href="../html/gerenciar.jsp">Gerenciar Estoque</a>
-        </nav>
-    </header>
+    <jsp:include page="../jsp/navbar_dono.jsp" />
     <main>
         <h1>Gerenciar Estoque</h1>
         <table>

@@ -36,8 +36,13 @@ public class CreateUserServlet extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
 
         response.getWriter().println("<script type='text/javascript'>");
-        response.getWriter().println("alert('Usuário cadastrado com sucesso! Siga para o login.');");
-        response.getWriter().println("window.location.href = 'html/login.jsp';");
+        response.getWriter().println("alert('Usuário cadastrado com sucesso!');");
+        User current = (User) request.getSession().getAttribute("user");
+        if (current != null && current.getPermissionLevel() == 1) {
+            response.getWriter().println("window.location.href = 'html/dono.html';");
+        } else {
+            response.getWriter().println("window.location.href = 'html/login.jsp';");
+        }
         response.getWriter().println("</script>");
 
     }
