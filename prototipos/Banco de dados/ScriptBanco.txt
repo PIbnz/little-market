@@ -62,3 +62,28 @@ INSERT INTO tbprodutos (nome, descricao, preco, estoque, imagem_url) VALUES
 ('Biscoito Recheado Chocolate 140g', 'Biscoito recheado sabor chocolate.', 2.50, 90, 'https://obahortifruti.vtexassets.com/arquivos/ids/4689655/Biscoito-Recheado-Duplo-Chocolate-Bauducco-140-G.jpg?v=638232266995730000'),
 ('Refrigerante Cola 2L', 'Refrigerante sabor cola, garrafa de 2 litros.', 7.49, 70, 'https://th.bing.com/th/id/OIP.IUs8ngbwj29Ng9Nj0vZv8QAAAA?rs=1&pid=ImgDetMain'),
 ('Água Mineral Sem Gás 1,5L', 'Água mineral natural sem gás.', 2.10, 100, 'https://th.bing.com/th/id/OIP.lPE3DORBLAYX5WuHuKMMpgHaHa?rs=1&pid=ImgDetMain');
+
+
+-- Usuário normal (tipo 1)
+INSERT INTO tbuser (username, password, user_type, email)
+VALUES ('joao', '123', 1, 'joao@abc.com');
+
+-- Funcionário (tipo 2)
+INSERT INTO tbuser (username, password, user_type, email)
+VALUES ('maria', '123', 2, 'maria@xyz.com');
+
+-- Outro usuário normal
+INSERT INTO tbuser (username, password, user_type, email)
+VALUES ('pedro', '123', 1, 'pedro@def.com');
+
+-- Funcionário sênior
+INSERT INTO tbuser (username, password, user_type, email)
+VALUES ('ana', '123', 2, 'ana@ghi.com');
+
+-- Usuário com email muito simples
+INSERT INTO tbuser (username, password, user_type, email)
+VALUES ('ze', '123', 1, 'ze@a.com');
+
+-- Funcionário com email simples
+INSERT INTO tbuser (username, password, user_type, email)
+VALUES ('lucas', '123', 2, 'lu@b.com');
