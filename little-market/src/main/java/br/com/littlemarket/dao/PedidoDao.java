@@ -34,20 +34,15 @@ public class PedidoDao {
         return -1;
     }
 
-    public void createItemPedido(ItemPedido itemPedido) throws SQLException {
+    public void createItemPedido(Connection connection, ItemPedido itemPedido) throws SQLException {
         String sql = "INSERT INTO tbitens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (?, ?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, itemPedido.getPedidoId());
             ps.setInt(2, itemPedido.getProdutoId());
             ps.setInt(3, itemPedido.getQuantidade());
             ps.setDouble(4, itemPedido.getPrecoUnitario());
             ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Error creating ItemPedido: " + e.getMessage());
-            throw e;
         }
     }
 
@@ -64,8 +59,16 @@ public class PedidoDao {
                     itemPedido.setQuantidade(item.getQuantidade());
                     itemPedido.setPrecoUnitario(item.getPrecoUnitario());
 
-                    createItemPedido(itemPedido);
+                    createItemPedido(connection, itemPedido);
                 }
+
+                // Atualiza o status do pedido para 'concluido'
+                String updateSql = "UPDATE tbpedidos SET status = 'concluido' WHERE id = ?";
+                try (PreparedStatement ps = connection.prepareStatement(updateSql)) {
+                    ps.setInt(1, pedidoId);
+                    ps.executeUpdate();
+                }
+
                 connection.commit();
             } catch (SQLException e) {
                 connection.rollback();

@@ -1,6 +1,8 @@
-<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
+<%@ page import="br.com.littlemarket.model.User" %>
 <%@ page import="br.com.littlemarket.model.Produto" %>
-<%@ page import="java.util.List" %>
+<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,51 +10,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Little Market</title>
-    <link rel="stylesheet" href="../css/produto.css">
+    <link rel="stylesheet" href="../css/usuario.css">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market">
-        </div>
-        <nav>
-            <a href="#">Alimento</a>
-            <a href="#">Higiene</a>
-            <a href="#">Limpeza</a>
-        </nav>
-        <br>
-        <div class="conta">
-            <a href="Conta.jsp">Minha Conta</a>
-        </div>
-    </header>
+    <jsp:include page="../jsp/navbar.jsp" />
 
     <main>
-        <%
-            ProdutoDao produtoDao = new ProdutoDao();
-            List<Produto> produtos = produtoDao.getAllProdutos();
-        %>
-        <section class="hero">
-            <h1>Produtos</h1>
-            <p>Confira nossas ofertas em alimentos, higiene e limpeza.</p>
-        </section>
-
-        <section class="products">
-            <%
-                for (Produto produto : produtos) { %>
-            <div class="product-card">
-                <img src="<%= produto.getImagemUrl() %>" alt="Imagem do Produto">
-                <h3><%= produto.getNome() %></h3>
-                <p class="preco">R$ <%= produto.getPreco() %></p>
-                <br>
-                <a href="resumo.html" class="button">Ver Resumo</a>
+        <div class="container">
+            <h2>Nossos Produtos</h2>
+            
+            <div class="categorias">
+                <h3>Categorias</h3>
+                <div class="categoria-links">
+                    <a href="#">Todos</a>
+                </div>
             </div>
-            <% } %>
-        </section>
+
+            <div class="produtos-grid">
+                <%
+                    ProdutoDao produtoDao = new ProdutoDao();
+                    List<Produto> produtos = produtoDao.getAllProdutos();
+                    
+                    for (Produto produto : produtos) {
+                %>
+                    <div class="produto-card">
+                        <div class="produto-imagem">
+                            <img src="<%= produto.getImagem() %>" alt="<%= produto.getNome() %>">
+                        </div>
+                        <div class="produto-info">
+                            <h3><%= produto.getNome() %></h3>
+                            <p class="preco">R$ <%= String.format("%.2f", produto.getPreco()) %></p>
+                            <p class="descricao"><%= produto.getDescricao() %></p>
+                            <form action="pedido.jsp" method="post">
+                                <input type="hidden" name="produtoId" value="<%= produto.getId() %>">
+                                <input type="number" name="quantidade" value="1" min="1" class="quantidade-input">
+                                <button type="submit" name="addProduto" class="btn btn-primary">Adicionar ao Carrinho</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
     </main>
 
     <footer>
         &copy; 2024 Little Market - Todos os direitos reservados.
     </footer>
-
 </body>
 </html>
