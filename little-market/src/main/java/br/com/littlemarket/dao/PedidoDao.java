@@ -2,8 +2,10 @@ package br.com.littlemarket.dao;
 
 import br.com.littlemarket.model.ItemCarrinho;
 import br.com.littlemarket.model.ItemPedido;
+import br.com.littlemarket.model.Pedido;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoDao {
@@ -70,6 +72,69 @@ public class PedidoDao {
                 throw e;
             }
         }
+    }
+
+    public List<Pedido> getPedidosByUserId(int userId) throws SQLException {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM tbpedidos WHERE user_id = ? ORDER BY data_pedido DESC";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(rs.getInt("id"));
+                pedido.setUserId(rs.getInt("user_id"));
+                pedido.setDataPedido(rs.getTimestamp("data_pedido"));
+                pedido.setStatus(rs.getString("status"));
+                
+                // Converte ItemCarrinho para ItemPedido
+                List<ItemCarrinho> itensCarrinho = getItensPedido(pedido.getId());
+                List<ItemPedido> itensPedido = new ArrayList<>();
+                
+                for (ItemCarrinho item : itensCarrinho) {
+                    ItemPedido itemPedido = new ItemPedido();
+                    itemPedido.setPedidoId(pedido.getId());
+                    itemPedido.setProdutoId(item.getProdutoId());
+                    itemPedido.setQuantidade(item.getQuantidade());
+                    itemPedido.setPrecoUnitario(item.getPrecoUnitario());
+                    itensPedido.add(itemPedido);
+                }
+                
+                pedido.setItens(itensPedido);
+                pedidos.add(pedido);
+            }
+        }
+        return pedidos;
+    }
+
+    public List<ItemCarrinho> getItensPedido(int pedidoId) throws SQLException {
+        List<ItemCarrinho> itens = new ArrayList<>();
+        String sql = "SELECT ip.*, p.nome as produto_nome " +
+                    "FROM tbitens_pedido ip " +
+                    "JOIN tbprodutos p ON ip.produto_id = p.id " +
+                    "WHERE ip.pedido_id = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, pedidoId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ItemCarrinho item = new ItemCarrinho(
+                    rs.getInt("produto_id"),
+                    rs.getString("produto_nome"),
+                    rs.getInt("quantidade"),
+                    rs.getDouble("preco_unitario")
+                );
+                itens.add(item);
+            }
+        }
+        return itens;
     }
 }
 
