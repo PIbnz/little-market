@@ -244,6 +244,12 @@
         String finalizar = request.getParameter("finalizar");
         if (finalizar != null && !carrinho.isEmpty()) {
             try {
+                if (user.getId() <= 0) {
+                    session.setAttribute("erro", "Erro: ID do usuário inválido. Por favor, faça login novamente.");
+                    response.sendRedirect("login.jsp");
+                    return;
+                }
+
                 int pedidoId = pedidoDao.criarPedido(user.getId());
                 if (pedidoId > 0) {
                     pedidoDao.finalizarPedido(pedidoId, carrinho);
@@ -254,9 +260,17 @@
                 } else {
                     session.setAttribute("erro", "Erro ao criar pedido. Tente novamente.");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
-                session.setAttribute("erro", "Erro ao finalizar pedido: " + e.getMessage());
+                String mensagemErro = "Erro ao finalizar pedido: ";
+                if (e.getMessage().contains("Usuário não encontrado")) {
+                    mensagemErro += "Usuário não encontrado. Por favor, faça login novamente.";
+                    session.setAttribute("erro", mensagemErro);
+                    response.sendRedirect("login.jsp");
+                } else {
+                    mensagemErro += e.getMessage();
+                    session.setAttribute("erro", mensagemErro);
+                }
             }
         }
 

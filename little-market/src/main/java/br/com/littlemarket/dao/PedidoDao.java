@@ -14,6 +14,11 @@ public class PedidoDao {
     private static final String DB_PASSWORD = "sa";
 
     public int criarPedido(int userId) throws SQLException {
+        // Primeiro, verifica se o usuário existe
+        if (!verificarUsuarioExiste(userId)) {
+            throw new SQLException("Usuário não encontrado com ID: " + userId);
+        }
+
         String sql = "INSERT INTO tbpedidos (user_id, status) VALUES (?, 'pendente')";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -28,10 +33,26 @@ public class PedidoDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error creating Pedido: " + e.getMessage());
+            System.out.println("Erro ao criar pedido: " + e.getMessage());
             throw e;
         }
         return -1;
+    }
+
+    private boolean verificarUsuarioExiste(int userId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM tbuser WHERE id = ?";
+        
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
     }
 
     public void createItemPedido(Connection connection, ItemPedido itemPedido) throws SQLException {
