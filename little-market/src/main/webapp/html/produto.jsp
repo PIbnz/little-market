@@ -35,7 +35,7 @@
                 %>
                     <div class="produto-card">
                         <div class="produto-imagem">
-                            <img src="<%= produto.getImagem() %>" alt="<%= produto.getNome() %>">
+                            <img src="<%= produto.getImagemUrl() %>" alt="<%= produto.getNome() %>">
                         </div>
                         <div class="produto-info">
                             <h3><%= produto.getNome() %></h3>

@@ -213,7 +213,7 @@
                             produto.getNome(),
                             quantidade,
                             produto.getPreco(),
-                            produto.getImagem()
+                            produto.getImagemUrl()
                         );
                         carrinho.add(novoItem);
                     }

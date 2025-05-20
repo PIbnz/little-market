@@ -116,7 +116,7 @@ public class PedidoDao {
 
     public List<ItemCarrinho> getItensPedido(int pedidoId) throws SQLException {
         List<ItemCarrinho> itens = new ArrayList<>();
-        String sql = "SELECT ip.*, p.nome as produto_nome " +
+        String sql = "SELECT ip.*, p.nome as produto_nome, p.imagem_url " +
                     "FROM tbitens_pedido ip " +
                     "JOIN tbprodutos p ON ip.produto_id = p.id " +
                     "WHERE ip.pedido_id = ?";
@@ -132,7 +132,8 @@ public class PedidoDao {
                     rs.getInt("produto_id"),
                     rs.getString("produto_nome"),
                     rs.getInt("quantidade"),
-                    rs.getDouble("preco_unitario")
+                    rs.getDouble("preco_unitario"),
+                    rs.getString("imagem_url")
                 );
                 itens.add(item);
             }
