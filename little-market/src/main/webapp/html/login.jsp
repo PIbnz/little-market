@@ -1,5 +1,5 @@
 <%@ page import="br.com.littlemarket.model.User" %>
-<%@ page import="br.com.littlemarket.dao.UserDao" %>
+<%@ page import="br.com.littlemarket.dao.LoginDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -35,8 +35,8 @@
 
         if (email != null && senha != null) {
             try {
-                UserDao userDao = new UserDao();
-                User loggedUser = userDao.login(email, senha);
+                LoginDao loginDao = new LoginDao();
+                User loggedUser = loginDao.login(email, senha);
                 
                 if (loggedUser != null) {
                     // Salva o usuário na sessão
