@@ -2,6 +2,8 @@
 <%@ page import="br.com.littlemarket.model.Pedido" %>
 <%@ page import="br.com.littlemarket.model.ItemPedido" %>
 <%@ page import="br.com.littlemarket.dao.PedidoDao" %>
+<%@ page import="br.com.littlemarket.model.Produto" %>
+<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -23,6 +25,7 @@
             <%
                 User user = (User) session.getAttribute("user");
                 PedidoDao pedidoDao = new PedidoDao();
+                ProdutoDao produtoDao = new ProdutoDao();
                 List<Pedido> pedidos = new ArrayList<Pedido>();
                 
                 if (user != null) {
@@ -61,9 +64,14 @@
                             <div class="itens-pedido">
                                 <h4>Itens do Pedido:</h4>
                                 <% if (pedido.getItens() != null) { %>
-                                    <% for (ItemPedido item : pedido.getItens()) { %>
+                                    <% for (ItemPedido item : pedido.getItens()) { 
+                                           Produto produto = produtoDao.getProdutoById(item.getProdutoId());
+                                     %>
                                         <div class="item">
-                                            <p><%= item.getProdutoId() %> - <%= item.getQuantidade() %> unidade(s)</p>
+                                            <div class="item-info">
+                                                <img src="<%= produto != null ? produto.getImagemUrl() : "" %>" alt="<%= produto != null ? produto.getNome() : "Produto" %>" class="item-thumb">
+                                                <span><%= produto != null ? produto.getNome() : ("Produto #" + item.getProdutoId()) %> - <%= item.getQuantidade() %> un.</span>
+                                            </div>
                                             <p class="preco">R$ <%= String.format("%.2f", item.getPrecoUnitario() * item.getQuantidade()) %></p>
                                         </div>
                                     <% } %>
@@ -153,6 +161,7 @@
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid #f5f5f5;
+            align-items: center;
         }
 
         .item:last-child {
@@ -190,6 +199,19 @@
         .alert a {
             color: inherit;
             text-decoration: underline;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
         }
     </style>
 </body>
