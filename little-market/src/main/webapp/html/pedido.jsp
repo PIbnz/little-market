@@ -1,6 +1,6 @@
 <%@ page import="br.com.littlemarket.model.User" %>
 <%@ page import="br.com.littlemarket.model.Produto" %>
-<%@page import="br.com.littlemarket.model.ItemCarrinho"%>
+<%@ page import="br.com.littlemarket.model.ItemCarrinho" %>
 <%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
 <%@ page import="br.com.littlemarket.dao.PedidoDao" %>
 <%@ page import="java.sql.*" %>
@@ -17,135 +17,149 @@
 <body>
     <jsp:include page="../jsp/navbar.jsp" />
 
-    <main>
-        <%
-            ProdutoDao produtoDao = new ProdutoDao();
-            List<Produto> produtos = produtoDao.getAllProdutos();
+    <%
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect("../html/login.html");
+            return;
+        }
 
-            // Recupera o carrinho da sessão
-            List<ItemCarrinho> carrinho = (List<ItemCarrinho>) session.getAttribute("carrinho");
+        ProdutoDao produtoDao = new ProdutoDao();
+        PedidoDao pedidoDao = new PedidoDao();
+        List<ItemCarrinho> carrinho = (List<ItemCarrinho>) session.getAttribute("carrinho");
+        if (carrinho == null) {
+            carrinho = new ArrayList<>();
+            session.setAttribute("carrinho", carrinho);
+        }
 
-            // Se não existir, cria um novo
-            if (carrinho == null) {
-                carrinho = new ArrayList<ItemCarrinho>();
-                session.setAttribute("carrinho", carrinho);
-            }
-
-            // Verifica se foi enviado um produto para adicionar
-            if (request.getParameter("adicionar") != null) {
+        // Adicionar produto ao carrinho
+        String addProduto = request.getParameter("addProduto");
+        if (addProduto != null) {
+            try {
                 int produtoId = Integer.parseInt(request.getParameter("produtoId"));
                 int quantidade = Integer.parseInt(request.getParameter("quantidade"));
-
-                // Busca o produto no banco
+                
                 Produto produto = produtoDao.getProdutoById(produtoId);
-
-                // Verifica se o produto já está no carrinho
-                boolean encontrado = false;
-                for (ItemCarrinho item : carrinho) {
-                    if (item.getProdutoId() == produtoId) {
-                        item.setQuantidade(item.getQuantidade() + quantidade);
-                        encontrado = true;
-                        break;
-                    }
-                }
-
-                // Se não encontrou, adiciona novo item
-                if (!encontrado) {
-                    carrinho.add(new ItemCarrinho(
-                        produtoId,
-                        produto.getNome(),
-                        quantidade,
-                        produto.getPreco()
-                    ));
-                }
-            }
-
-            // Verifica se foi solicitada a remoção de um item
-            if (request.getParameter("remover") != null) {
-                int produtoId = Integer.parseInt(request.getParameter("produtoId"));
-                Iterator<ItemCarrinho> iterator = carrinho.iterator();
-                while (iterator.hasNext()) {
-                    ItemCarrinho item = iterator.next();
-                    if (item.getProdutoId() == produtoId) {
-                        iterator.remove();
-                        break;
-                    }
-                }
-            }
-
-            // Verifica se foi solicitado finalizar o pedido
-            if (request.getParameter("finalizar") != null && !carrinho.isEmpty()) {
-                Integer userId = (Integer) session.getAttribute("userId");
-
-                if (userId != null) {
-                    PedidoDao pedidoDao = new PedidoDao();
-                    try {
-                        int pedidoId = pedidoDao.criarPedido(userId);
-
-                        if (pedidoId > 0) {
-                            pedidoDao.finalizarPedido(pedidoId, carrinho);
-                            carrinho.clear();
-                            response.sendRedirect("../jsp/pedidos.jsp?sucesso=Pedido #" + pedidoId + " realizado com sucesso!");
-                            return;
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        response.sendRedirect("../jsp/pedidos.jsp?erro=Erro ao finalizar pedido: " + e.getMessage());
-                        return;
-                    }
-                }
-                response.sendRedirect("../jsp/pedidos.jsp?erro=Erro ao finalizar pedido: Usuário não autenticado");
-            }
-        %>
-
-        <h2>Fazer Novo Pedido</h2>
-
-        <div class="painel">
-            <div class="card">
-                <form method="post" class="pedido-form">
-                    <label for="produto">Produto</label>
-                    <select id="produto" name="produtoId" required>
-                        <option value="">Selecione um produto</option>
-                        <% for (Produto produto : produtos) { %>
-                        <option value="<%= produto.getId() %>"><%= produto.getNome() %> - R$ <%= produto.getPreco() %></option>
-                        <% } %>
-                    </select>
-
-                    <label for="quantidade">Quantidade</label>
-                    <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
-
-                    <button type="submit" name="adicionar">Adicionar ao Carrinho</button>
-                </form>
-            </div>
-
-            <div class="card">
-                <h3>Seu Carrinho</h3>
-                <% if (carrinho.isEmpty()) { %>
-                    <p>Seu carrinho está vazio.</p>
-                <% } else { %>
-                    <%
-                    double totalPedido = 0;
+                if (produto != null) {
+                    boolean itemExiste = false;
                     for (ItemCarrinho item : carrinho) {
-                        totalPedido += item.getTotal();
-                    %>
-                        <div class="carrinho-item">
-                            <p><strong><%= item.getProdutoNome() %></strong></p>
-                            <p>Quantidade: <%= item.getQuantidade() %></p>
-                            <p>Preço Unitário: R$ <%= String.format("%.2f", item.getPrecoUnitario()) %></p>
-                            <p>Total: R$ <%= String.format("%.2f", item.getTotal()) %></p>
-                            <form method="post" style="display:inline;">
-                                <input type="hidden" name="produtoId" value="<%= item.getProdutoId() %>">
-                                <button type="submit" name="remover">Remover</button>
+                        if (item.getProdutoId() == produtoId) {
+                            item.setQuantidade(item.getQuantidade() + quantidade);
+                            itemExiste = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!itemExiste) {
+                        ItemCarrinho novoItem = new ItemCarrinho(
+                            produtoId,
+                            produto.getNome(),
+                            quantidade,
+                            produto.getPreco()
+                        );
+                        carrinho.add(novoItem);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Remover item do carrinho
+        String removeItem = request.getParameter("removeItem");
+        if (removeItem != null) {
+            try {
+                int produtoId = Integer.parseInt(removeItem);
+                carrinho.removeIf(item -> item.getProdutoId() == produtoId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Finalizar pedido
+        String finalizar = request.getParameter("finalizar");
+        if (finalizar != null && !carrinho.isEmpty()) {
+            try {
+                int pedidoId = pedidoDao.criarPedido(user.getId());
+                if (pedidoId > 0) {
+                    pedidoDao.finalizarPedido(pedidoId, carrinho);
+                    carrinho.clear();
+                    response.sendRedirect("verPedido.jsp");
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<Produto> produtos = produtoDao.getAllProdutos();
+    %>
+
+    <main>
+        <div class="container">
+            <h2>Novo Pedido</h2>
+            
+            <div class="pedido-container">
+                <div class="form-section">
+                    <h3>Adicionar Produto</h3>
+                    <form method="post" class="add-produto-form">
+                        <div class="form-group">
+                            <label for="produtoId">Produto:</label>
+                            <select name="produtoId" id="produtoId" required>
+                                <option value="">Selecione um produto</option>
+                                <% for (Produto produto : produtos) { %>
+                                    <option value="<%= produto.getId() %>">
+                                        <%= produto.getNome() %> - R$ <%= String.format("%.2f", produto.getPreco()) %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade:</label>
+                            <input type="number" name="quantidade" id="quantidade" min="1" value="1" required>
+                        </div>
+                        
+                        <button type="submit" name="addProduto" class="btn btn-primary">Adicionar ao Carrinho</button>
+                    </form>
+                </div>
+
+                <div class="carrinho-section">
+                    <h3>Carrinho</h3>
+                    <% if (carrinho.isEmpty()) { %>
+                        <p class="empty-cart">Seu carrinho está vazio</p>
+                    <% } else { %>
+                        <div class="carrinho-items">
+                            <% for (ItemCarrinho item : carrinho) { %>
+                                <div class="carrinho-item">
+                                    <div class="item-info">
+                                        <h4><%= item.getProdutoNome() %></h4>
+                                        <p>Quantidade: <%= item.getQuantidade() %></p>
+                                        <p>Preço unitário: R$ <%= String.format("%.2f", item.getPrecoUnitario()) %></p>
+                                        <p class="item-total">Total: R$ <%= String.format("%.2f", item.getQuantidade() * item.getPrecoUnitario()) %></p>
+                                    </div>
+                                    <form method="post" class="remove-form">
+                                        <input type="hidden" name="removeItem" value="<%= item.getProdutoId() %>">
+                                        <button type="submit" class="btn btn-danger">Remover</button>
+                                    </form>
+                                </div>
+                            <% } %>
+                            
+                            <div class="carrinho-total">
+                                <h4>Total do Pedido:</h4>
+                                <p class="total-value">
+                                    R$ <%= String.format("%.2f", carrinho.stream()
+                                        .mapToDouble(item -> item.getQuantidade() * item.getPrecoUnitario())
+                                        .sum()) %>
+                                </p>
+                            </div>
+                            
+                            <form method="post" class="finalizar-form">
+                                <button type="submit" name="finalizar" class="btn btn-success">Finalizar Pedido</button>
                             </form>
                         </div>
                     <% } %>
-                    <div class="total">
-                        <p><strong>Total do Pedido: R$ <%= String.format("%.2f", totalPedido) %></strong></p>
-                        <form method="post">
-                            <button type="submit" name="finalizar">Finalizar Pedido</button>
-                        </form>
-                    </div>
-                <% } %>
+                </div>
             </div>
         </div>
     </main>
