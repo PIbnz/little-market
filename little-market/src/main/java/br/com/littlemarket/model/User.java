@@ -2,6 +2,7 @@ package br.com.littlemarket.model;
 
 public class User {
 
+    private int id;
     private String name;
     private String email;
     private String password; 
@@ -19,6 +20,10 @@ public class User {
     }
 
     // Getters
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -36,6 +41,10 @@ public class User {
     }
 
     // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

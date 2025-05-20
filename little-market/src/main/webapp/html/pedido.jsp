@@ -15,16 +15,7 @@
     <link rel="stylesheet" href="../css/usuario.css">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img">
-            <div class="logo-text">Little Market</div>
-        </div>
-        <nav>
-            <a href="usuario.html">Home</a>
-            <a href="produto.jsp">Produtos</a>
-        </nav>
-    </header>
+    <jsp:include page="../jsp/navbar.jsp" />
 
     <main>
         <%
@@ -156,12 +147,6 @@
                     </div>
                 <% } %>
             </div>
-        </div>
-
-        <div class="actions">
-            <a href="usuario.html" class="card">🏠 Voltar para Home</a>
-            <a href="../jsp/pedidos.jsp" class="card">📦 Ver Meus Pedidos</a>
-            <a href="Conta.jsp" class="card">👤 Dados da Conta</a>
         </div>
     </main>
 

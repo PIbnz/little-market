@@ -60,4 +60,16 @@ public class Pedido {
     public void setItens(List<ItemPedido> itens) {
         this.itens = itens;
     }
+
+    public double getTotal() {
+        if (itens == null) return 0.0;
+        return itens.stream()
+                   .mapToDouble(item -> item.getQuantidade() * item.getPrecoUnitario())
+                   .sum();
+    }
+
+    public String getData() {
+        if (dataPedido == null) return "";
+        return dataPedido.toString();
+    }
 }
