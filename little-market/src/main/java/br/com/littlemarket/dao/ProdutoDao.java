@@ -2,10 +2,7 @@ package br.com.littlemarket.dao;
 
 import br.com.littlemarket.model.Produto;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,5 +83,29 @@ public class ProdutoDao {
             System.out.println("Erro ao alterar produto: " + e.getMessage());
             return false;
         }
+    }
+
+    public Produto getProdutoById(int produtoId) {
+        String sql = "SELECT * FROM tbprodutos WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, produtoId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Produto(
+                            rs.getInt("id"),
+                            rs.getString("nome"),
+                            rs.getString("descricao"),
+                            rs.getDouble("preco"),
+                            rs.getInt("estoque"),
+                            rs.getString("imagem_url")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Retorna null se o produto não for encontrado
     }
 }

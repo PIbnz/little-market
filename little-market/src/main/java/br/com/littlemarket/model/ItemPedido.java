@@ -57,4 +57,8 @@ public class ItemPedido {
     public void setPrecoUnitario(double precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
+
+    public double getTotal(){
+        return precoUnitario * quantidade;
+    }
 }
