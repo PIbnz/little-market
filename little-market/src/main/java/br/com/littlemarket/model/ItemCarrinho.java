@@ -1,6 +1,9 @@
 package br.com.littlemarket.model;
 
-public class ItemCarrinho extends ItemPedido {
+import java.io.Serializable;
+
+public class ItemCarrinho extends ItemPedido implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String produtoNome;
     private String imagem;
 
