@@ -6,7 +6,7 @@ public class User {
     private String name;
     private String email;
     private String password; 
-    private int permissionLevel; // 0 = user, 1 = admin
+    private int permissionLevel; // 0 = user, 1 = admin, 2 = funcionário
 
     public User(String name, String email, String password) {
         this(name, email, password, 0);

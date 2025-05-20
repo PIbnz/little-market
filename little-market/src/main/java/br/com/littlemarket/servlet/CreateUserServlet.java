@@ -18,11 +18,16 @@ public class CreateUserServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String username = request.getParameter("nome");
-        String userPassword = request.getParameter("senha");
+        String username = request.getParameter("username") != null ? request.getParameter("username") : request.getParameter("nome");
+        String userPassword = request.getParameter("password") != null ? request.getParameter("password") : request.getParameter("senha");
         String userEmail = request.getParameter("email");
 
-        User user = new User(username, userEmail, userPassword);
+        int permissionLevel = 1;
+        try {
+            permissionLevel = Integer.parseInt(request.getParameter("permissionLevel"));
+        } catch (Exception ignored) {}
+
+        User user = new User(username, userEmail, userPassword, permissionLevel);
         UserDao userDao = new UserDao();
 
         userDao.createUser(user);
@@ -32,7 +37,7 @@ public class CreateUserServlet extends HttpServlet{
 
         response.getWriter().println("<script type='text/javascript'>");
         response.getWriter().println("alert('Usuário cadastrado com sucesso! Siga para o login.');");
-        response.getWriter().println("window.location.href = '/html/login.html';");
+        response.getWriter().println("window.location.href = 'html/login.jsp';");
         response.getWriter().println("</script>");
 
     }

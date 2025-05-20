@@ -1,5 +1,5 @@
-<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
-<%@ page import="br.com.littlemarket.model.Produto" %>
+<%@ page import="br.com.littlemarket.dao.PedidoDao" %>
+<%@ page import="br.com.littlemarket.model.Pedido" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -16,42 +16,65 @@
         <div class="logo-text">Little Market</div>
     </div>
     <nav>
-        <a href="produto.jsp">Produtos</a>
+        <a href="dono.html">Painel</a>
         <a href="adicionarProduto.html">Adicionar Produto</a>
-        <a href="../html/gerenciar.html">Gerenciar Estoque</a>
+        <a href="gerenciar.jsp">Gerenciar Estoque</a>
+        <a href="login.jsp?logout=true">Sair</a>
     </nav>
 </header>
 <main>
-    <h1>Verificar Pedidos</h1>
+    <h1>Pedidos Recebidos</h1>
+    <%
+        PedidoDao pedidoDao = new PedidoDao();
+        // Concluir pedido se parâmetro presente
+        String concluir = request.getParameter("concluirId");
+        if (concluir != null) {
+            try {
+                int pid = Integer.parseInt(concluir);
+                pedidoDao.atualizarStatus(pid, "concluido");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        List<Pedido> lista = null;
+        try {
+            lista = pedidoDao.getAllPedidos();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    %>
     <table>
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Id do Usuario</th>
-            <th>Total do Pedido</th>
-            <th>Quantidade de Itens</th>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Status</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-        <%
-            ProdutoDao produtoDao = new ProdutoDao();
-            List<Produto> produtos = produtoDao.getAllProdutos();
-            for (Produto produto : produtos) { %> <%--alterar pra pedido--%>
-        <tr>
-            <td><%= produto.getId() %> <%--id pedido--%>
-            </td>
-            <td><%= produto.getNome() %> <%--id do usuario--%>
-            </td>
-            <td>R$ <%= produto.getPreco() %> <%--total do pedido--%>
-            </td>
-            <td><%= produto.getEstoque() %> <%--total de itens no pedido--%>
-            </td>
-            <td>
-                <button class="editar">Verificar Pedido</button>
-            </td>
-        </tr>
-        <% } %>
+        <% if (lista != null) {
+               for (Pedido p : lista) { %>
+            <tr>
+                <td><%= p.getId() %></td>
+                <td><%= p.getUserId() %></td>
+                <td><%= p.getData() %></td>
+                <td>R$ <%= String.format("%.2f", p.getTotal()) %></td>
+                <td><%= p.getStatus() %></td>
+                <td>
+                    <% if (!"concluido".equalsIgnoreCase(p.getStatus())) { %>
+                        <form method="post">
+                            <input type="hidden" name="concluirId" value="<%= p.getId() %>">
+                            <button type="submit">Marcar Pronto</button>
+                        </form>
+                    <% } else { %>
+                        -
+                    <% } %>
+                </td>
+            </tr>
+        <% } } %>
         </tbody>
     </table>
 </main>
@@ -59,6 +82,5 @@
 <footer>
     &copy; 2024 Little Market - Todos os direitos reservados.
 </footer>
-
 </body>
 </html>

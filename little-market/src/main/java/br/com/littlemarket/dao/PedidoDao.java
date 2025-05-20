@@ -207,5 +207,49 @@ public class PedidoDao {
         }
         return itens;
     }
+
+    // Atualiza status genérico
+    public boolean atualizarStatus(int pedidoId, String novoStatus) throws SQLException {
+        String sql = "UPDATE tbpedidos SET status = ? WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, novoStatus);
+            ps.setInt(2, pedidoId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    public List<Pedido> getAllPedidos() throws SQLException {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM tbpedidos ORDER BY data_pedido DESC";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(rs.getInt("id"));
+                pedido.setUserId(rs.getInt("user_id"));
+                pedido.setDataPedido(rs.getTimestamp("data_pedido"));
+                pedido.setStatus(rs.getString("status"));
+
+                List<ItemCarrinho> itensCarrinho = getItensPedido(pedido.getId());
+                List<ItemPedido> itensPedido = new ArrayList<>();
+                for (ItemCarrinho item : itensCarrinho) {
+                    ItemPedido ip = new ItemPedido();
+                    ip.setPedidoId(pedido.getId());
+                    ip.setProdutoId(item.getProdutoId());
+                    ip.setQuantidade(item.getQuantidade());
+                    ip.setPrecoUnitario(item.getPrecoUnitario());
+                    itensPedido.add(ip);
+                }
+                pedido.setItens(itensPedido);
+                pedidos.add(pedido);
+            }
+        }
+        return pedidos;
+    }
 }
 

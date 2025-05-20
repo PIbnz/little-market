@@ -29,15 +29,6 @@ public class LoginDao {
                 User user = new User(name, userEmail, userPassword, userType);
                 user.setId(id);
 
-                // Se a classe User possuir campos adicionais, definimos aqui via reflexão opcional
-                try {
-                    user.getClass().getMethod("setCpf", String.class).invoke(user, rs.getString("cpf"));
-                    user.getClass().getMethod("setTelefone", String.class).invoke(user, rs.getString("telefone"));
-                    user.getClass().getMethod("setEndereco", String.class).invoke(user, rs.getString("endereco"));
-                } catch (NoSuchMethodException ignored) {
-                    // Ignora se não houver esses campos
-                }
-
                 connection.close();
                 return user;
             }
