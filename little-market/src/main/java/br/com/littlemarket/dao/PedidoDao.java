@@ -19,24 +19,31 @@ public class PedidoDao {
             throw new SQLException("Usuário não encontrado com ID: " + userId);
         }
 
-        String sql = "INSERT INTO tbpedidos (user_id, status) VALUES (?, 'pendente')";
+        String sql = "INSERT INTO tbpedidos (user_id, status, data_pedido) VALUES (?, 'pendente', CURRENT_TIMESTAMP)";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, userId);
-            ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Falha ao criar pedido, nenhuma linha afetada.");
+            }
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
-                    return rs.getInt(1);
+                    int pedidoId = rs.getInt(1);
+                    System.out.println("Pedido criado com sucesso. ID: " + pedidoId);
+                    return pedidoId;
+                } else {
+                    throw new SQLException("Falha ao criar pedido, nenhum ID gerado.");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Erro ao criar pedido: " + e.getMessage());
             throw e;
         }
-        return -1;
     }
 
     private boolean verificarUsuarioExiste(int userId) throws SQLException {
@@ -63,15 +70,26 @@ public class PedidoDao {
             ps.setInt(2, itemPedido.getProdutoId());
             ps.setInt(3, itemPedido.getQuantidade());
             ps.setDouble(4, itemPedido.getPrecoUnitario());
-            ps.executeUpdate();
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Falha ao adicionar item ao pedido.");
+            }
         }
     }
 
     public void finalizarPedido(int pedidoId, List<ItemCarrinho> itens) throws SQLException {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             connection.setAutoCommit(false); // Inicia transação
 
             try {
+                // Primeiro, verifica se o pedido existe
+                if (!verificarPedidoExiste(connection, pedidoId)) {
+                    throw new SQLException("Pedido não encontrado com ID: " + pedidoId);
+                }
+
                 // Converte itens do carrinho para ItemPedido e salva
                 for (ItemCarrinho item : itens) {
                     ItemPedido itemPedido = new ItemPedido();
@@ -81,21 +99,49 @@ public class PedidoDao {
                     itemPedido.setPrecoUnitario(item.getPrecoUnitario());
 
                     createItemPedido(connection, itemPedido);
+                    System.out.println("Item adicionado ao pedido: " + itemPedido);
                 }
 
                 // Atualiza o status do pedido para 'concluido'
                 String updateSql = "UPDATE tbpedidos SET status = 'concluido' WHERE id = ?";
                 try (PreparedStatement ps = connection.prepareStatement(updateSql)) {
                     ps.setInt(1, pedidoId);
-                    ps.executeUpdate();
+                    int affectedRows = ps.executeUpdate();
+                    if (affectedRows == 0) {
+                        throw new SQLException("Falha ao atualizar status do pedido.");
+                    }
                 }
 
                 connection.commit();
+                System.out.println("Pedido finalizado com sucesso. ID: " + pedidoId);
             } catch (SQLException e) {
-                connection.rollback();
+                if (connection != null) {
+                    connection.rollback();
+                }
+                System.out.println("Erro ao finalizar pedido: " + e.getMessage());
                 throw e;
             }
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Erro ao fechar conexão: " + e.getMessage());
+                }
+            }
         }
+    }
+
+    private boolean verificarPedidoExiste(Connection connection, int pedidoId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM tbpedidos WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, pedidoId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
     }
 
     public List<Pedido> getPedidosByUserId(int userId) throws SQLException {

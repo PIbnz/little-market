@@ -255,7 +255,7 @@
                     pedidoDao.finalizarPedido(pedidoId, carrinho);
                     carrinho.clear();
                     session.setAttribute("mensagem", "Pedido finalizado com sucesso!");
-                    response.sendRedirect("verPedido.jsp");
+                    response.sendRedirect("verPedido.jsp?id=" + pedidoId);
                     return;
                 } else {
                     session.setAttribute("erro", "Erro ao criar pedido. Tente novamente.");
