@@ -1,13 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f2f2f2;
+    padding: 20px;
   }
   
   table{
     width: 100%;
     border-collapse: collapse;
-    margin: auto;
+    margin: 20px auto;
     box-shadow: 0, 3px, 5px rgba(0, 0, 0, 0.1);
     background-color: white;
     border-radius: 8px;
@@ -17,6 +23,7 @@ body {
     border: 1px solid #ddd;
     padding: 0.9rem;
     text-align: left;
+    font-size: 0.95rem;
   }
 
   th{
@@ -69,6 +76,11 @@ button.excluir {
     border-radius: 5px;
     cursor: pointer;
 }
+
+  button.excluir:hover{
+  background-color: #a30000;
+  }
+    
 button.alterar {
     background-color: #1976d2;
     color: white;
@@ -76,4 +88,54 @@ button.alterar {
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+button.alterar:hover {
+  background-color: #0b4da1;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007a33;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 40px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #d2f5e3;
+}
+
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #007a33;
 }
