@@ -44,7 +44,7 @@
     <input type="hidden" name="idProduto" value="<%= produto != null ? produto.getId() : "" %>" />
     <input type="text" placeholder="Nome do Produto" name="nome" id="nome" required value="<%= produto != null ? produto.getNome() : "" %>" />
     <input type="number" placeholder="Preço" step="0.01" name="preco" id="preco" required value="<%= produto != null ? produto.getPreco() : "" %>" />
-    <input type="number" placeholder="Estoque" step="0.01" name="estoque" id="estoque" required value="<%= produto != null ? produto.getEstoque() : "" %>" />
+    <input type="number" placeholder="Estoque" step="1" name="estoque" id="estoque" required value="<%= produto != null ? produto.getEstoque() : "" %>" />
     <input type="text" placeholder="URL da Imagem" name="imagem_url" id="imagem_url" required value="<%= produto != null ? produto.getImagemUrl() : "" %>" />
     <textarea placeholder="Descrição do Produto" rows="4" id="descricao" name="descricao"><%= produto != null ? produto.getDescricao() : "" %></textarea>
     <button type="submit">Editar produto</button>
