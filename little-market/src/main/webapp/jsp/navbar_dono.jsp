@@ -8,7 +8,7 @@
         <div class="logo-text">Little Market</div>
     </div>
 
-    <nav style="background-color: #0e773b;">
+    <nav>
         <a href="dono.html">Home</a>
         <a href="verPedidosAdm.jsp">Pedidos</a>
         <a href="gerenciar.jsp">Estoque</a>
