@@ -10,75 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gerenciar Pedidos</title>
-    <link rel="stylesheet" href="../css/gerenciar.css">
-    <style>
-        /* Estilos da navbar */
-        header {
-            background-color: #0e773b;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-img {
-            height: 40px;
-            width: auto;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #007bff;
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-menu span {
-            color: #666;
-        }
-
-        .user-menu a {
-            text-decoration: none;
-            color: #dc3545;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .user-menu a:hover {
-            color: #c82333;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/dono.css">
 </head>
 <body>
     <%
@@ -89,7 +21,25 @@
             return;
         }
     %>
-    <jsp:include page="../jsp/navbar_dono.jsp" />
+    <header>
+        <div class="logo-container">
+            <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img" />
+            <div class="logo-text">Little Market</div>
+        </div>
+
+        <nav>
+            <a href="verPedidosAdm.jsp">Pedidos</a>
+            <a href="gerenciar.jsp">Estoque</a>
+            <a href="adicionarProduto.html">Adicionar Produto</a>
+            <a href="adicionarFuncionario.jsp">Adicionar Funcionário</a>
+        </nav>
+
+        <div class="user-menu">
+            <span>Painel do Dono</span>
+            <a href="login.jsp?logout=true">Sair</a>
+        </div>
+    </header>
+
     <main>
         <h1>Pedidos Recebidos</h1>
         <%
