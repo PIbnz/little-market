@@ -94,7 +94,7 @@
                         </span>
                     </td>
                     <td class="actions">
-                        <a href="<%= request.getContextPath() %>/html/verPedidoAdm.jsp?id=<%= p.getId() %>" class="btn-view">
+                        <a href="<%= request.getContextPath() %>/html/verPedido.jsp?id=<%= p.getId() %>" class="btn-view">
                             Ver Detalhes
                         </a>
                         <% if (!"concluido".equalsIgnoreCase(p.getStatus())) { %>
