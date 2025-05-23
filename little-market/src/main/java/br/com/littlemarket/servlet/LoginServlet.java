@@ -21,10 +21,12 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             // Redireciona conforme o tipo de usuário
-            if (user.getPermissionLevel() == 1) {
-                response.sendRedirect("html/usuario.html");
-            } else {
+            if (user.getPermissionLevel() == 2) {
+                // Dono ou funcionário
                 response.sendRedirect("html/dono.html");
+            } else {
+                // Usuário comum (permissionLevel 1)
+                response.sendRedirect("html/usuario.html");
             }
         } else {
             request.setAttribute("erro", "Login inválido");

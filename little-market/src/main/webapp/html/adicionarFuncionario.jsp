@@ -11,7 +11,7 @@
     <main>
         <div class="container">
             <h2>Novo Funcionário</h2>
-            <form method="post" action="../create-user" class="cadastro-form">
+            <form method="post" action="<%= request.getContextPath() %>/create-user" class="cadastro-form">
                 <input type="hidden" name="permissionLevel" value="2">
                 <div class="form-group">
                     <label for="nome">Nome:</label>

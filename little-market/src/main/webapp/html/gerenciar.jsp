@@ -39,11 +39,11 @@
                 <td><%= produto.getEstoque() %>
                 </td>
                 <td>
-                    <form action="../html/editarProduto.jsp" method="get" style="display: inline;">
+                    <form action="<%= request.getContextPath() %>/html/editarProduto.jsp" method="get" style="display: inline;">
                         <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
                         <button class="alterar" type="submit">Alterar</button>
                     </form>
-                    <form action="/delete-produto" method="post" style="display: inline;" onsubmit="exclusao();">
+                    <form action="<%= request.getContextPath() %>/delete-produto" method="post" style="display: inline;" onsubmit="exclusao();">
                         <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
                         <button class="excluir" type="submit">Deletar</button>
                     </form>

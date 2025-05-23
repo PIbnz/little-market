@@ -40,7 +40,7 @@
 %>
 <main>
   <h1>Editar Produto</h1>
-  <form class="formulario" action="/alterar-produto" method="post" onsubmit="mostrarPopup()">
+  <form class="formulario" action="<%= request.getContextPath() %>/alterar-produto" method="post" onsubmit="mostrarPopup()">
     <input type="hidden" name="idProduto" value="<%= produto != null ? produto.getId() : "" %>" />
     <input type="text" placeholder="Nome do Produto" name="nome" id="nome" required value="<%= produto != null ? produto.getNome() : "" %>" />
     <input type="number" placeholder="Preço" step="0.01" name="preco" id="preco" required value="<%= produto != null ? produto.getPreco() : "" %>" />

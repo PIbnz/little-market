@@ -38,7 +38,7 @@ public class CreateUserServlet extends HttpServlet{
         response.getWriter().println("<script type='text/javascript'>");
         response.getWriter().println("alert('Usuário cadastrado com sucesso!');");
         User current = (User) request.getSession().getAttribute("user");
-        if (current != null && current.getPermissionLevel() == 1) {
+        if (current != null && current.getPermissionLevel() == 2) {
             response.getWriter().println("window.location.href = 'html/dono.html';");
         } else {
             response.getWriter().println("window.location.href = 'html/login.jsp';");

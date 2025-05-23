@@ -61,6 +61,12 @@
                                 <p><strong>Data:</strong> <%= pedido.getData() %></p>
                                 <p><strong>Total:</strong> R$ <%= String.format("%.2f", pedido.getTotal()) %></p>
                             </div>
+                            <div class="pedido-acoes">
+                                <form action="pedido.jsp" method="get" style="display:inline-block;">
+                                    <input type="hidden" name="editarPedidoId" value="<%= pedido.getId() %>" />
+                                    <button type="submit" class="btn-primary">Editar Itens</button>
+                                </form>
+                            </div>
                             <div class="itens-pedido">
                                 <h4>Itens do Pedido:</h4>
                                 <% if (pedido.getItens() != null) { %>
@@ -212,6 +218,22 @@
             height: 50px;
             object-fit: cover;
             border-radius: 4px;
+        }
+
+        /* Botão Editar Itens */
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
         }
     </style>
 </body>
