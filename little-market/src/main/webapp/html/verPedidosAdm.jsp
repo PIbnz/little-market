@@ -3,6 +3,7 @@
 <%@ page import="br.com.littlemarket.model.ItemPedido" %>
 <%@ page import="java.util.List" %>
 <%@ page import="br.com.littlemarket.dao.UserDao" %>
+<%@ page import="br.com.littlemarket.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -12,12 +13,21 @@
     <link rel="stylesheet" href="../css/gerenciar.css">
 </head>
 <body>
+    <%
+        // Verificar se o usuário está logado e é admin
+        User user = (User) session.getAttribute("user");
+        if (user == null || user.getPermissionLevel() != 2) {
+            response.sendRedirect("../html/login.jsp");
+            return;
+        }
+    %>
     <jsp:include page="../jsp/navbar_dono.jsp" />
 <main>
     <h1>Pedidos Recebidos</h1>
     <%
         PedidoDao pedidoDao = new PedidoDao();
         UserDao udao = new UserDao();
+        
         // Concluir pedido se parâmetro presente
         String concluir = request.getParameter("concluirId");
         if (concluir != null) {
@@ -28,6 +38,11 @@
                 return;
             } catch (Exception e) {
                 e.printStackTrace();
+                %>
+                <div class="alert alert-danger">
+                    Erro ao concluir pedido: <%= e.getMessage() %>
+                </div>
+                <%
             }
         }
 
@@ -46,6 +61,11 @@
             lista = pedidoDao.getAllPedidos();
         } catch (Exception e) {
             e.printStackTrace();
+            %>
+            <div class="alert alert-danger">
+                Erro ao carregar pedidos: <%= e.getMessage() %>
+            </div>
+            <%
         }
     %>
     <div class="table-container">
@@ -61,11 +81,11 @@
             </tr>
             </thead>
             <tbody>
-            <% if (lista != null) {
+            <% if (lista != null && !lista.isEmpty()) {
                    for (Pedido p : lista) { %>
                 <tr>
                     <td><%= p.getId() %></td>
-                    <td><%= udao.getUserById(p.getUserId()) != null ? udao.getUserById(p.getUserId()).getName() : p.getUserId() %></td>
+                    <td><%= udao.getUserById(p.getUserId()) != null ? udao.getUserById(p.getUserId()).getName() : "Cliente #" + p.getUserId() %></td>
                     <td><%= p.getData() %></td>
                     <td>R$ <%= String.format("%.2f", p.getTotal()) %></td>
                     <td>
@@ -86,7 +106,11 @@
                         <% } %>
                     </td>
                 </tr>
-            <% } } %>
+            <% } } else { %>
+                <tr>
+                    <td colspan="6" class="no-orders">Nenhum pedido encontrado</td>
+                </tr>
+            <% } %>
             </tbody>
         </table>
     </div>
@@ -190,6 +214,18 @@
         background-color: #d4edda;
         color: #155724;
         border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .no-orders {
+        text-align: center;
+        color: #666;
+        padding: 20px;
     }
 </style>
 </body>
