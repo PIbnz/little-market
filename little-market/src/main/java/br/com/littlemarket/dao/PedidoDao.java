@@ -213,9 +213,7 @@ public class PedidoDao {
 
     public List<Pedido> getAllPedidos() throws SQLException {
         List<Pedido> pedidos = new ArrayList<>();
-        String sql = "SELECT p.*, u.name as user_name FROM tbpedidos p " +
-                    "LEFT JOIN tbuser u ON p.user_id = u.id " +
-                    "ORDER BY p.data_pedido DESC";
+        String sql = "SELECT * FROM tbpedidos ORDER BY data_pedido DESC";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement ps = connection.prepareStatement(sql)) {
