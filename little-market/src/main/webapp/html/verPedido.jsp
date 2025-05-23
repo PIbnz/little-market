@@ -46,7 +46,7 @@
                 if (pedidoId != null) {
                     try {
                         int pid = Integer.parseInt(pedidoId);
-                        // Busca o pedido específico do usuário
+                        // Busca todos os pedidos do usuário logado
                         List<Pedido> userPedidos = pedidoDao.getPedidosByUserId(user.getId());
                         for (Pedido p : userPedidos) {
                             if (p.getId() == pid) {
