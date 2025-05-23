@@ -41,7 +41,7 @@ public class CreateUserServlet extends HttpServlet{
         if (current != null && current.getPermissionLevel() == 2) {
             response.getWriter().println("window.location.href = 'html/dono.html';");
         } else {
-            response.getWriter().println("window.location.href = 'html/login.jsp';");
+            response.getWriter().println("window.location.href = 'html/login.html';");
         }
         response.getWriter().println("</script>");
 
