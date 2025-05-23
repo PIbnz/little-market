@@ -4,22 +4,20 @@
 %>
 <header>
     <div class="logo-container">
-        <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img">
+        <img src="../img/INDEX/logo-pequena.png" alt="Logo da empresa Little Market" class="logo-img" />
         <div class="logo-text">Little Market</div>
     </div>
+
     <nav>
-        <a href="../html/dono.html">Painel</a>
-        <a href="../html/verPedidosAdm.jsp">Pedidos</a>
-        <a href="../html/gerenciar.jsp">Estoque</a>
-        <a href="../html/adicionarProduto.html">Adicionar Produto</a>
-        <a href="../html/adicionarFuncionario.jsp">Adicionar Funcionário</a>
+        <a href="dono.html">Home</a>
+        <a href="verPedidosAdm.jsp">Pedidos</a>
+        <a href="gerenciar.jsp">Estoque</a>
+        <a href="adicionarProduto.html">Adicionar Produto</a>
+        <a href="adicionarFuncionario.jsp">Adicionar Funcionario</a>
     </nav>
+
     <div class="user-menu">
-        <% if (user != null) { %>
-            <span>Ola, <%= user.getName() %> (Dono)</span>
-            <a href="../html/login.jsp?logout=true">Sair</a>
-        <% } else { %>
-            <a href="../html/login.jsp">Login</a>
-        <% } %>
+        <span>Painel do Dono</span>
+        <a href="login.jsp?logout=true">Sair</a>
     </div>
 </header> 

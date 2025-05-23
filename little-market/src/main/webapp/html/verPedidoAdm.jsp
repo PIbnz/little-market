@@ -1,53 +1,66 @@
-<%@ page import="br.com.littlemarket.dao.PedidoDao" %>
-<%@ page import="br.com.littlemarket.model.Pedido" %>
-<%@ page import="br.com.littlemarket.model.ItemPedido" %>
-<%@ page import="java.util.List" %>
-<%@ page import="br.com.littlemarket.dao.UserDao" %>
-<%@ page import="br.com.littlemarket.model.User" %>
-<%@ page import="br.com.littlemarket.dao.ProdutoDao" %>
-<%@ page import="br.com.littlemarket.model.Produto" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="br.com.littlemarket.dao.PedidoDao"%>
+<%@ page import="br.com.littlemarket.dao.UserDao"%>
+<%@ page import="br.com.littlemarket.dao.ProdutoDao"%>
+<%@ page import="br.com.littlemarket.model.Pedido"%>
+<%@ page import="br.com.littlemarket.model.User"%>
+<%@ page import="br.com.littlemarket.model.Produto"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+
+<%
+    User user = (User) session.getAttribute("user");
+    if (user == null || user.getPermissionLevel() != 2) {
+        response.sendRedirect("../html/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Detalhes do Pedido - Admin</title>
-    <link rel="stylesheet" href="../css/gerenciar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido - Little Market</title>
+    <link rel="stylesheet" href="../css/dono.css">
 </head>
 <body>
-    <%
-        // Verificar se o usuário está logado e é admin
-        User user = (User) session.getAttribute("user");
-        if (user == null || user.getPermissionLevel() != 2) {
-            response.sendRedirect("../html/login.jsp");
-            return;
-        }
+    <header>
+        <div class="logo-container">
+            <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img" />
+            <div class="logo-text">Little Market</div>
+        </div>
 
-        PedidoDao pedidoDao = new PedidoDao();
-        UserDao userDao = new UserDao();
-        ProdutoDao produtoDao = new ProdutoDao();
-        
-        String pedidoId = request.getParameter("id");
-        Pedido pedido = null;
-        
-        if (pedidoId != null) {
-            try {
-                int pid = Integer.parseInt(pedidoId);
-                List<Pedido> allPedidos = pedidoDao.getAllPedidos();
-                for (Pedido p : allPedidos) {
-                    if (p.getId() == pid) {
-                        pedido = p;
-                        break;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    %>
-    <jsp:include page="../jsp/navbar_dono.jsp" />
+        <nav>
+            <a href="verPedidosAdm.jsp">Pedidos</a>
+            <a href="gerenciar.jsp">Estoque</a>
+            <a href="adicionarProduto.html">Adicionar Produto</a>
+            <a href="adicionarFuncionario.jsp">Adicionar Funcionário</a>
+        </nav>
+
+        <div class="user-menu">
+            <span>Painel do Dono</span>
+            <a href="login.jsp?logout=true">Sair</a>
+        </div>
+    </header>
 
     <main>
+        <%
+            PedidoDao pedidoDao = new PedidoDao();
+            UserDao userDao = new UserDao();
+            ProdutoDao produtoDao = new ProdutoDao();
+            
+            String pedidoId = request.getParameter("id");
+            Pedido pedido = null;
+            
+            if (pedidoId != null) {
+                try {
+                    int pid = Integer.parseInt(pedidoId);
+                    pedido = pedidoDao.getPedidoById(pid);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        %>
         <div class="container">
             <div class="header-actions">
                 <a href="verPedidosAdm.jsp" class="btn-back">← Voltar para Lista de Pedidos</a>
