@@ -7,7 +7,24 @@
   <link rel="stylesheet" href="../css/dono.css" />
 </head>
 <body>
-  <jsp:include page="../jsp/navbar_dono.jsp" />
+  <header>
+    <div class="logo-container">
+      <img src="../img/INDEX/logo-pequena.png" alt="Logo Little Market" class="logo-img" />
+      <div class="logo-text">Little Market</div>
+    </div>
+
+    <nav>
+      <a href="verPedidosAdm.jsp">Pedidos</a>
+      <a href="gerenciar.jsp">Estoque</a>
+      <a href="adicionarProduto.html">Adicionar Produto</a>
+      <a href="adicionarFuncionario.jsp">Adicionar Funcionário</a>
+    </nav>
+
+    <div class="user-menu">
+      <span>Painel do Dono</span>
+      <a href="login.jsp?logout=true">Sair</a>
+    </div>
+  </header>
 
   <main>
     <h2>Painel do Dono</h2>

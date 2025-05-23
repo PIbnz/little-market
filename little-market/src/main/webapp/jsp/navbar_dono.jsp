@@ -9,11 +9,15 @@
     </div>
 
     <nav>
-        <a href="produto.jsp">Home</a>
+        <a href="dono.html">Home</a>
+        <a href="verPedidosAdm.jsp">Pedidos</a>
+        <a href="gerenciar.jsp">Estoque</a>
+        <a href="adicionarProduto.html">Adicionar Produto</a>
+        <a href="adicionarFuncionario.jsp">Adicionar Funcionário</a>
     </nav>
 
     <div class="user-menu">
-        <span>Admin</span>
-        <a href="../html/login.html">Sair</a>
+        <span>Painel do Dono</span>
+        <a href="login.jsp?logout=true">Sair</a>
     </div>
 </header> 
