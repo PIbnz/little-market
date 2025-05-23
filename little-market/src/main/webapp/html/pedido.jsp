@@ -183,6 +183,22 @@
 
         ProdutoDao produtoDao = new ProdutoDao();
         PedidoDao pedidoDao = new PedidoDao();
+
+        // --- Suporte para edição de pedido -----
+        String editarPedidoIdParam = request.getParameter("editarPedidoId");
+        if (editarPedidoIdParam != null) {
+            // Usuário solicitou editar um pedido existente
+            try {
+                int editPedidoId = Integer.parseInt(editarPedidoIdParam);
+                // Carrega itens do pedido na sessão (carrinho)
+                List<ItemCarrinho> carrinho = pedidoDao.getItensPedido(editPedidoId);
+                session.setAttribute("carrinho", carrinho);
+                session.setAttribute("editandoPedidoId", editPedidoId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         List<ItemCarrinho> carrinho = (List<ItemCarrinho>) session.getAttribute("carrinho");
         if (carrinho == null) {
             carrinho = new ArrayList<ItemCarrinho>();
@@ -250,16 +266,29 @@
                     return;
                 }
 
-                int pedidoId = pedidoDao.criarPedido(user.getId());
-                if (pedidoId > 0) {
-                    pedidoDao.finalizarPedido(pedidoId, carrinho);
-                    carrinho.clear();
-                    session.setAttribute("mensagem", "Pedido finalizado com sucesso!");
-                    response.sendRedirect("verPedido.jsp?id=" + pedidoId);
-                    return;
+                // Verifica se estamos editando pedido existente
+                Integer editandoPedidoId = (Integer) session.getAttribute("editandoPedidoId");
+                int pedidoId;
+                if (editandoPedidoId != null) {
+                    pedidoId = editandoPedidoId;
+                    // Atualiza itens
+                    pedidoDao.atualizarItensPedido(pedidoId, carrinho);
+                    session.removeAttribute("editandoPedidoId");
+                    session.setAttribute("mensagem", "Pedido atualizado com sucesso!");
                 } else {
-                    session.setAttribute("erro", "Erro ao criar pedido. Tente novamente.");
+                    // Novo pedido
+                    pedidoId = pedidoDao.criarPedido(user.getId());
+                    if (pedidoId > 0) {
+                        pedidoDao.finalizarPedido(pedidoId, carrinho);
+                        session.setAttribute("mensagem", "Pedido criado com sucesso!");
+                    } else {
+                        session.setAttribute("erro", "Erro ao criar pedido. Tente novamente.");
+                    }
                 }
+
+                carrinho.clear();
+                response.sendRedirect("verPedido.jsp?id=" + pedidoId);
+                return;
             } catch (SQLException e) {
                 e.printStackTrace();
                 String mensagemErro = "Erro ao finalizar pedido: ";

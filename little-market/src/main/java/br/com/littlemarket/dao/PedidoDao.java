@@ -102,15 +102,7 @@ public class PedidoDao {
                     System.out.println("Item adicionado ao pedido: " + itemPedido);
                 }
 
-                // Atualiza o status do pedido para 'concluido'
-                String updateSql = "UPDATE tbpedidos SET status = 'concluido' WHERE id = ?";
-                try (PreparedStatement ps = connection.prepareStatement(updateSql)) {
-                    ps.setInt(1, pedidoId);
-                    int affectedRows = ps.executeUpdate();
-                    if (affectedRows == 0) {
-                        throw new SQLException("Falha ao atualizar status do pedido.");
-                    }
-                }
+                // Mantém status como 'pendente' até ser concluído pelo administrador.
 
                 connection.commit();
                 System.out.println("Pedido finalizado com sucesso. ID: " + pedidoId);
@@ -250,6 +242,38 @@ public class PedidoDao {
             }
         }
         return pedidos;
+    }
+
+    public void atualizarItensPedido(int pedidoId, List<ItemCarrinho> itens) throws SQLException {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            connection.setAutoCommit(false);
+
+            // Remove itens antigos
+            String deleteSql = "DELETE FROM tbitens_pedido WHERE pedido_id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(deleteSql)) {
+                ps.setInt(1, pedidoId);
+                ps.executeUpdate();
+            }
+
+            // Insere novos itens
+            for (ItemCarrinho item : itens) {
+                ItemPedido itemPedido = new ItemPedido();
+                itemPedido.setPedidoId(pedidoId);
+                itemPedido.setProdutoId(item.getProdutoId());
+                itemPedido.setQuantidade(item.getQuantidade());
+                itemPedido.setPrecoUnitario(item.getPrecoUnitario());
+                createItemPedido(connection, itemPedido);
+            }
+
+            connection.commit();
+        } catch (SQLException e) {
+            if (connection != null) connection.rollback();
+            throw e;
+        } finally {
+            if (connection != null) connection.close();
+        }
     }
 }
 
