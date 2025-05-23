@@ -16,6 +16,7 @@
         <table>
             <tr>
                 <th>Id</th>
+                <th>Nome</th>
                 <th>Preço</th>
                 <th>Descrição</th>
                 <th>Estoque</th>
@@ -38,7 +39,7 @@
                 <td><%= produto.getEstoque() %>
                 </td>
                 <td>
-                    <form action="/alterar-produto" method="post" style="display: inline;">
+                    <form action="../html/editarProduto.jsp" method="get" style="display: inline;">
                         <input type="hidden" id="idProduto" name="idProduto" value="<%= produto.getId() %>">
                         <button class="alterar" type="submit">Alterar</button>
                     </form>
@@ -56,6 +57,10 @@
     <footer>
         &copy; 2024 Little Market - Todos os direitos reservados.
     </footer>
-
+    <script>
+        function exclusao() {
+            alert("Produto excluído com sucesso!");
+        }
+    </script>
 </body>
 </html>

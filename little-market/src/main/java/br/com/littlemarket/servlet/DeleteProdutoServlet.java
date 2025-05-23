@@ -26,7 +26,7 @@ public class DeleteProdutoServlet extends HttpServlet {
         boolean sucesso = produtoDao.deleteProduto(idProduto);
 
         if (sucesso) {
-            response.sendRedirect("jsp/deletarEalterarProdutos.jsp");
+            response.sendRedirect("html/gerenciar.jsp");
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao deletar o produto.");
         }

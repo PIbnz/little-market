@@ -17,8 +17,8 @@
         <div class="logo-text">Little Market</div>
     </div>
     <nav>
-        <a href="usuario.html">Home</a>
-        <a href="produtos.html">Produtos</a>
+        <a href="html/usuario.html">Home</a>
+        <a href="html/produtos.html">Produtos</a>
     </nav>
 </header>
 
@@ -55,7 +55,7 @@
                             <input type="hidden" name="idProduto" value="<%= produto.getId() %>">
                             <button class="alterar" type="submit">Alterar</button>
                         </form>
-                        <form action="/delete-produto" method="post" class="inline-form" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+                        <form action="/delete-produto" method="post" style="display: inline;" onsubmit="exclusao();">
                             <input type="hidden" name="idProduto" value="<%= produto.getId() %>">
                             <button class="excluir" type="submit">Deletar</button>
                         </form>
@@ -66,7 +66,11 @@
         </table>
     </section>
 </main>
-
+<script>
+    function exclusao() {
+        alert("Produto excluído com sucesso!");
+    }
+</script>
 <footer>
     <p>&copy; 2024 Little Market - Todos os direitos reservados.</p>
 </footer>

@@ -16,7 +16,7 @@
     </nav>
     <div class="user-menu">
         <% if (user != null) { %>
-            <span>Olá, <%= user.getName() %> (Dono)</span>
+            <span>Ola, <%= user.getName() %> (Dono)</span>
             <a href="../html/login.jsp?logout=true">Sair</a>
         <% } else { %>
             <a href="../html/login.jsp">Login</a>
