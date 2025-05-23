@@ -8,12 +8,12 @@
         <div class="logo-text">Little Market</div>
     </div>
 
-    <nav>
+    <nav style="background-color: #0e773b;">
         <a href="dono.html">Home</a>
         <a href="verPedidosAdm.jsp">Pedidos</a>
         <a href="gerenciar.jsp">Estoque</a>
         <a href="adicionarProduto.html">Adicionar Produto</a>
-        <a href="adicionarFuncionario.jsp">Adicionar Funcionário</a>
+        <a href="adicionarFuncionario.jsp">Adicionar Funcionario</a>
     </nav>
 
     <div class="user-menu">
